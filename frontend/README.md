@@ -1,36 +1,32 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Solicitação de viagem
 
-## Getting Started
+- [] Deve conter um formulário com os campos para informar o id do usuário, o endereço de origem e o endereço de destino e um botão para estimar o valor da viagem.
+- [] Deve fazer a requisição para a API passando os parâmetros necessários, ao receber a resposta deve exibir a tela de opções de viagem.
 
-First, run the development server:
+## Opções de viagem
+- [] Deve mostrar um mapa estático com a rota retornada na estimativa plotada, indicando o ponto A e o ponto B.
+- [] Deve mostrar a lista de opções de motoristas com:
+- nome.
+- descrição.
+- veículo.
+- avaliação.
+- valor da viagem.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- [] Para cada motorista deve ter um botão “Escolher”, que irá fazer a requisição para a API e confirmar a viagem.
+- [] Após confirmar a viagem, deve direcionar automaticamente para a tela de histórico de viagens.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Histórico de viagens
+- [] Deve mostrar um campo para informar o id do usuário, um
+seletor de motorista, com uma opção para mostrar todos e um
+botão para aplicar o filtro.
+- [] Ao aplicar o filtro, deve exibir a lista das viagens realizadas, com:
+- data e hora da viagem.
+- nome do motorista.
+- origem.
+- destino.
+- distância.
+- tempo.
+- valor.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Tratamento de erros
+- [] Em todas as telas, os erros devem ser exibidos para o usuário, permitindo que ele verifique o problema e tente novamente.
