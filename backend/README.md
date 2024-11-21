@@ -7,27 +7,27 @@
 - [] Depois também poderá listar o histórico das viagens realizadas.
 
 ### Requisitos não funcionais
-- [] O usuário precisa ter um ID único.
-- [] O usuário precisa ter um nome.
-- [] O usuário precisa ter um email.
+- [x] O usuário precisa ter um ID único.
+- [x] O usuário precisa ter um nome.
+- [x] O usuário precisa ter um email.
 
 ## Drivers
 ### Requisitos não funcionais
-- [] O motorista precisa ter ID único.
-- [] O motorista precisa ter um nome.
-- [] O motorista precisa ter uma descrição.
-- [] O motorista precisa ter um carro.
-- [] O motorista precisa ter uma avaliação.
-- [] O motorista precisa ter uma taxa fixa.
-- [] O motorista precisa ter uma kilometragem mínina.
+- [x] O motorista precisa ter ID único.
+- [x] O motorista precisa ter um nome.
+- [x] O motorista precisa ter uma descrição.
+- [x] O motorista precisa ter um carro.
+- [x] O motorista precisa ter uma avaliação.
+- [x] O motorista precisa ter uma taxa fixa.
+- [x] O motorista precisa ter uma kilometragem mínina.
 
 ## Travel
 ### Requisitos não funcionais
-- [] A viagem precisa ter data e hora.
-- [] A viagem precisa ter nome do motorista.
-- [] A viagem precisa ter origem e destino.
-- [] A viagem precisa ter distância e tempo.
-- [] A viagem precisa ter valor.
+- [x] A viagem precisa ter data e hora.
+- [x] A viagem precisa ter nome do motorista.
+- [x] A viagem precisa ter origem e destino.
+- [x] A viagem precisa ter distância e tempo.
+- [x] A viagem precisa ter valor.
 
 # Rotas
 
