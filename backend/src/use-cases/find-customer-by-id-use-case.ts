@@ -1,5 +1,5 @@
 import { Customer } from '@prisma/client'
-import { CustomerRepository } from './repositories/contracts/customer-repository'
+import { CustomersRepository } from './repositories/contracts/customers-repository'
 import { CustomerNotFound } from './errors/customer-not-found'
 
 interface FindCustomerByIdUseCaseRequest {
@@ -11,12 +11,12 @@ interface FindCustomerByIdUseCaseResponse {
 }
 
 export class FindCustomerByIdUseCase {
-  constructor(private customerRepository: CustomerRepository) {}
+  constructor(private customersRepository: CustomersRepository) {}
 
   async execute({
     id,
   }: FindCustomerByIdUseCaseRequest): Promise<FindCustomerByIdUseCaseResponse> {
-    const customer = await this.customerRepository.findCustomerById(id)
+    const customer = await this.customersRepository.findCustomerById(id)
 
     if (!customer) {
       throw new CustomerNotFound()

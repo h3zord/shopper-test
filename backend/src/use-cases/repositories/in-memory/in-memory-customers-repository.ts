@@ -1,8 +1,8 @@
 import { Customer, Prisma } from '@prisma/client'
-import { CustomerRepository } from '../contracts/customer-repository'
+import { CustomersRepository } from '../contracts/customers-repository'
 import { randomUUID } from 'node:crypto'
 
-export class InMemoryCustomerRepository implements CustomerRepository {
+export class InMemoryCustomersRepository implements CustomersRepository {
   public items: Customer[] = []
 
   async register(data: Prisma.CustomerCreateInput) {
