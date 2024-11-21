@@ -8,6 +8,8 @@
 
 ### Requisitos não funcionais
 - [] O usuário precisa ter um ID único.
+- [] O usuário precisa ter um nome.
+- [] O usuário precisa ter um email.
 
 ## Drivers
 ### Requisitos não funcionais
