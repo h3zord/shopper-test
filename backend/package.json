@@ -9,18 +9,22 @@
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "build": "tsup src --out-dir build",
-    "start": "node build/server.js"
+    "start": "node build/server.js",
+    "test": "vitest run --dir src/use-cases",
+    "test:watch": "vitest --dir src/use-cases"
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",
     "prisma": "^5.22.0"
   },
   "devDependencies": {
+    "@faker-js/faker": "^9.2.0",
     "@rocketseat/eslint-config": "^2.2.2",
     "@types/node": "^22.9.1",
     "eslint": "^8.57.1",
     "tsup": "^8.3.5",
     "tsx": "^4.19.2",
-    "typescript": "^5.6.3"
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.5"
   }
 }
