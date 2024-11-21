@@ -1,5 +1,5 @@
 import { Customer } from '@prisma/client'
-import { CustomersRepository } from './repositories/contracts/customers-repository'
+import { CustomersRepository } from '../repositories/contracts/customers-repository'
 import { CustomerAlreadyExists } from './errors/customer-already-exsists'
 
 interface RegisterUseCaseRequest {

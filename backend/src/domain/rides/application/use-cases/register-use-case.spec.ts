@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it } from 'vitest'
-import { InMemoryCustomersRepository } from './repositories/in-memory/in-memory-customers-repository'
+import { InMemoryCustomersRepository } from '../repositories/in-memory/in-memory-customers-repository'
 import { RegisterUseCase } from './register-use-case'
-import { createCustomerInMemory } from '../utils/tests/create-customer-in-memory'
+import { createCustomerInMemory } from '../../../../utils/tests/create-customer-in-memory'
 import { CustomerAlreadyExists } from './errors/customer-already-exsists'
 
 describe('Register customer id unit test', () => {

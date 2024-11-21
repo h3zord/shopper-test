@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:13   # Versão do PostgreSQL
+    container_name: my_postgres_db  # Nome do container
+    environment:
+      POSTGRES_USER: postgres_user   # Nome do usuário do banco
+      POSTGRES_PASSWORD: postgres_password   # Senha do usuário
+      POSTGRES_DB: my_database  # Nome do banco de dados inicial
+    ports:
+      - "5432:5432"  # Mapeando a porta 5432 do container para a porta 5432 do host

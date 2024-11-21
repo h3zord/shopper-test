@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it } from 'vitest'
-import { InMemoryCustomersRepository } from './repositories/in-memory/in-memory-customers-repository'
-import { createCustomerInMemory } from '../utils/tests/create-customer-in-memory'
+import { InMemoryCustomersRepository } from '../repositories/in-memory/in-memory-customers-repository'
+import { createCustomerInMemory } from '../../../../utils/tests/create-customer-in-memory'
 import { CustomerNotFound } from './errors/customer-not-found'
 import { FindCustomerByEmailUseCase } from './find-customer-by-email-use-case'
 
