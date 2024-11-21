@@ -1,10 +1,10 @@
 import { Customer, Prisma } from '@prisma/client'
 import { randomUUID } from 'crypto'
 import { faker } from '@faker-js/faker'
-import { CustomersRepository } from '../../use-cases/repositories/contracts/customers-repository'
+import { InMemoryCustomersRepository } from '../../use-cases/repositories/in-memory/in-memory-customers-repository'
 
 export function createCustomerInMemory(
-  customersRepository: CustomersRepository,
+  customersRepository: InMemoryCustomersRepository,
   data: Partial<Prisma.CustomerCreateInput> = {},
 ) {
   const customer: Customer = {
@@ -14,7 +14,7 @@ export function createCustomerInMemory(
     createdAt: data.createdAt ? new Date(data.createdAt) : new Date(),
   }
 
-  customersRepository.register(customer)
+  customersRepository.items.push(customer)
 
   return customer
 }
