@@ -12,44 +12,48 @@ interface GetRideDetailsServiceProps {
   destinationCoordinates: Coordinates
 }
 
-interface getRideDetailsServiceResponse {
+interface GetRideDetailsServiceResponse {
   distance: number
   duration: string
 }
 
-export async function getRideDetailsService({
-  originCoordinates,
-  destinationCoordinates,
-}: GetRideDetailsServiceProps): Promise<getRideDetailsServiceResponse> {
-  const googleMapsApiKey = 'AIzaSyBb43btE7llvofiBSvGJV9A6IzJYk70BtY'
+export class GetRideDetailsService {
+  static async execute({
+    originCoordinates,
+    destinationCoordinates,
+  }: GetRideDetailsServiceProps): Promise<GetRideDetailsServiceResponse> {
+    const googleMapsApiKey = 'AIzaSyBb43btE7llvofiBSvGJV9A6IzJYk70BtY'
 
-  const originString = `${originCoordinates.latitude},${originCoordinates.longitude}`
-  const destinationString = `${destinationCoordinates.latitude},${destinationCoordinates.longitude}`
+    const baseUrl = 'https://maps.googleapis.com/maps/api/distancematrix/json'
 
-  const url = `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${originString}&destinations=${destinationString}&key=${googleMapsApiKey}`
+    const originString = `${originCoordinates.latitude},${originCoordinates.longitude}`
+    const destinationString = `${destinationCoordinates.latitude},${destinationCoordinates.longitude}`
 
-  try {
-    const response = await axios.get(url)
+    const url = `${baseUrl}?origins=${originString}&destinations=${destinationString}&key=${googleMapsApiKey}`
 
-    if (response.data.status === 'OK') {
-      const element = response.data.rows[0].elements[0]
+    try {
+      const response = await axios.get(url)
 
-      if (element.status === 'OK') {
-        const distance = element.distance.value
-        const duration = element.duration.text
+      if (response.data.status === 'OK') {
+        const element = response.data.rows[0].elements[0]
 
-        return {
-          distance,
-          duration,
+        if (element.status === 'OK') {
+          const distance = element.distance.value
+          const duration = element.duration.text
+
+          return {
+            distance,
+            duration,
+          }
+        } else {
+          throw new Error(`Distance matrix error: ${element.status}`)
         }
       } else {
-        throw new Error(`Distance matrix error: ${element.status}`)
+        throw new Error(`Distance matrix error: ${response.data.status}`)
       }
-    } else {
-      throw new Error(`Distance matrix error: ${response.data.status}`)
+    } catch (error) {
+      throw new GetRideDetailsError(error)
     }
-  } catch (error) {
-    throw new GetRideDetailsError(error)
   }
 }
 

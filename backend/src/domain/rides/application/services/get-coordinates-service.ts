@@ -25,7 +25,9 @@ export class GetCoordinatesService {
   ): Promise<convertAddressToCoordinatesResponse> {
     const googleMapsApiKey = 'AIzaSyBb43btE7llvofiBSvGJV9A6IzJYk70BtY'
 
-    const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${googleMapsApiKey}`
+    const baseUrl = 'https://maps.googleapis.com/maps/api/geocode/json'
+
+    const url = `${baseUrl}?address=${encodeURIComponent(address)}&key=${googleMapsApiKey}`
 
     try {
       const response = await axios.get(url)
