@@ -3,7 +3,7 @@ import { InMemoryDriversRepository } from '../repositories/in-memory/in-memory-d
 import { createDriverInMemory } from '../../../../utils/tests/create-driver-in-memory'
 import { FindDriverByMinDistanceUseCase } from './find-drivers-by-min-distance-use-case'
 
-describe('Find driver by mminimum distance unit test', () => {
+describe('Find driver by minimum distance unit test', () => {
   let driversRepository: InMemoryDriversRepository
   let sut: FindDriverByMinDistanceUseCase
 

@@ -1,6 +1,5 @@
 import { Driver } from '@prisma/client'
 import { DriversRepository } from '../repositories/contracts/drivers-repository'
-import { Decimal } from '@prisma/client/runtime/library'
 
 interface FindDriverByMinDistanceUseCaseRequest {
   distanceInMeters: number
@@ -13,7 +12,7 @@ interface FindDriverByMinDistanceUseCaseResponse {
     description: string
     vehicle: string
     review: {
-      rating: Decimal
+      rating: number
       comment: string
     }
     value: number
@@ -39,7 +38,7 @@ export class FindDriverByMinDistanceUseCase {
         description: driver.description,
         vehicle: driver.vehicle,
         review: {
-          rating: driver.rating,
+          rating: driver.rating.toNumber(),
           comment: driver.comment,
         },
         value: driver.pricePerKilometer.toNumber() * (distanceInMeters / 1000),

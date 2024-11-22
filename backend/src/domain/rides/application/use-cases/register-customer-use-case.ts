@@ -2,22 +2,22 @@ import { Customer } from '@prisma/client'
 import { CustomersRepository } from '../repositories/contracts/customers-repository'
 import { CustomerAlreadyExists } from './errors/customer-already-exsists'
 
-interface RegisterUseCaseRequest {
+interface RegisterCustomerUseCaseRequest {
   name: string
   email: string
 }
 
-interface RegisterUseCaseResponse {
+interface RegisterCustomerUseCaseResponse {
   customer: Customer
 }
 
-export class RegisterUseCase {
+export class RegisterCustomerUseCase {
   constructor(private customersRepository: CustomersRepository) {}
 
   async execute({
     name,
     email,
-  }: RegisterUseCaseRequest): Promise<RegisterUseCaseResponse> {
+  }: RegisterCustomerUseCaseRequest): Promise<RegisterCustomerUseCaseResponse> {
     const customerAlreadyExists =
       await this.customersRepository.findCustomerByEmail(email)
 

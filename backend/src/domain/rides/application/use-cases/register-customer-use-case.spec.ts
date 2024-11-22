@@ -1,16 +1,16 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 import { InMemoryCustomersRepository } from '../repositories/in-memory/in-memory-customers-repository'
-import { RegisterUseCase } from './register-use-case'
+import { RegisterCustomerUseCase } from './register-customer-use-case'
 import { createCustomerInMemory } from '../../../../utils/tests/create-customer-in-memory'
 import { CustomerAlreadyExists } from './errors/customer-already-exsists'
 
 describe('Register customer id unit test', () => {
   let customersRepository: InMemoryCustomersRepository
-  let sut: RegisterUseCase
+  let sut: RegisterCustomerUseCase
 
   beforeEach(async () => {
     customersRepository = new InMemoryCustomersRepository()
-    sut = new RegisterUseCase(customersRepository)
+    sut = new RegisterCustomerUseCase(customersRepository)
   })
 
   it('should be able to create a new customer', async () => {
