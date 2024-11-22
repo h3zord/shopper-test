@@ -1,5 +1,6 @@
 import { CustomersRepository } from '../repositories/contracts/customers-repository'
 import { getCoordinatesService } from '../services/get-coordinates-service'
+import { getRideDetailsService } from '../services/get-ride-details-service'
 import { CustomerNotFound } from './errors/customer-not-found'
 import { InvalidData } from './errors/invalid-data'
 
@@ -32,5 +33,15 @@ export class RideEstimateUseCase {
         originAddress,
         destinationAddress,
       })
+
+    const { distance, duration } = await getRideDetailsService({
+      originCoordinates,
+      destinationCoordinates,
+    })
+
+    return {
+      distance,
+      duration,
+    }
   }
 }

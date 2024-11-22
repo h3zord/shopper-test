@@ -2,8 +2,18 @@ import axios from 'axios'
 
 import { GetCoordinatesError } from './errors/get-coordinates-error'
 
-async function convertAddressToCoordinates(address: string) {
+interface Coordinates {
+  latitude: number
+  longitude: number
+}
+
+interface convertAddressToCoordinatesResponse extends Coordinates {}
+
+async function convertAddressToCoordinates(
+  address: string,
+): Promise<convertAddressToCoordinatesResponse> {
   const googleMapsApiKey = 'AIzaSyBb43btE7llvofiBSvGJV9A6IzJYk70BtY'
+
   const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${googleMapsApiKey}`
 
   try {
@@ -24,15 +34,20 @@ async function convertAddressToCoordinates(address: string) {
   }
 }
 
-interface GetCoordinatesProps {
+interface GetCoordinatesServiceProps {
   originAddress: string
   destinationAddress: string
+}
+
+interface GetCoordinatesServiceResponse {
+  originCoordinates: Coordinates
+  destinationCoordinates: Coordinates
 }
 
 export async function getCoordinatesService({
   originAddress,
   destinationAddress,
-}: GetCoordinatesProps) {
+}: GetCoordinatesServiceProps): Promise<GetCoordinatesServiceResponse> {
   try {
     const originCoordinates = await convertAddressToCoordinates(originAddress)
     const destinationCoordinates =
