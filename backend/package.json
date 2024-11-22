@@ -10,7 +10,7 @@
     "dev": "tsx watch src/server.ts",
     "build": "tsup src --out-dir build",
     "start": "node build/server.js",
-    "test": "vitest run --dir src/use-cases",
+    "test": "vitest run --dir src/domain/rides/application/use-cases",
     "test:watch": "vitest --dir src/use-cases"
   },
   "dependencies": {

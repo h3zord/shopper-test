@@ -13,4 +13,18 @@ export class InMemoryDriversRepository implements DriversRepository {
 
     return driver
   }
+
+  async findDriversByMinDistance(distanceInMeters: number) {
+    const unsortedDriverList = this.items.filter((driver) => {
+      const distanceInKilometers = distanceInMeters / 1000
+
+      return distanceInKilometers >= driver.minimumKilometers
+    })
+
+    const sortedDriverListByPrice = unsortedDriverList.sort(
+      (a, b) => a.pricePerKilometer.toNumber() - b.pricePerKilometer.toNumber(),
+    )
+
+    return sortedDriverListByPrice
+  }
 }

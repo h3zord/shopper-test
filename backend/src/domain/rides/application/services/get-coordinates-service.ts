@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 import { GetCoordinatesError } from './errors/get-coordinates-error'
+import { GetCoordinates } from './contracts/get-coordinates'
 
 interface Coordinates {
   latitude: number
@@ -19,8 +20,8 @@ interface GetCoordinatesServiceResponse {
   destinationCoordinates: Coordinates
 }
 
-export class GetCoordinatesService {
-  private static async convertAddressToCoordinates(
+export class GetCoordinatesService implements GetCoordinates {
+  private async convertAddressToCoordinates(
     address: string,
   ): Promise<convertAddressToCoordinatesResponse> {
     const googleMapsApiKey = 'AIzaSyBb43btE7llvofiBSvGJV9A6IzJYk70BtY'
@@ -47,7 +48,7 @@ export class GetCoordinatesService {
     }
   }
 
-  static async execute({
+  async execute({
     originAddress,
     destinationAddress,
   }: GetCoordinatesServiceProps): Promise<GetCoordinatesServiceResponse> {

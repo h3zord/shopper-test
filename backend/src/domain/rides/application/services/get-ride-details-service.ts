@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 import { GetRideDetailsError } from './errors/get-ride-details-error'
+import { GetRideDetails } from './contracts/get-ride-details'
 
 interface Coordinates {
   latitude: number
@@ -12,57 +13,88 @@ interface GetRideDetailsServiceProps {
   destinationCoordinates: Coordinates
 }
 
-interface GetRideDetailsServiceResponse {
-  distance: number
+interface Route {
+  distanceMeters: number
   duration: string
 }
 
-export class GetRideDetailsService {
-  static async execute({
+interface GetRideDetailsApiResponse {
+  routes: Route[]
+}
+
+interface GetRideDetailsServiceResponse {
+  distanceInMeters: number
+  durationInSeconds: string
+  fullRouteResponse: GetRideDetailsApiResponse
+}
+
+export class GetRideDetailsService implements GetRideDetails {
+  async execute({
     originCoordinates,
     destinationCoordinates,
   }: GetRideDetailsServiceProps): Promise<GetRideDetailsServiceResponse> {
     const googleMapsApiKey = 'AIzaSyBb43btE7llvofiBSvGJV9A6IzJYk70BtY'
 
-    const baseUrl = 'https://maps.googleapis.com/maps/api/distancematrix/json'
+    const baseUrl = 'https://routes.googleapis.com/directions/v2:computeRoutes'
 
-    const originString = `${originCoordinates.latitude},${originCoordinates.longitude}`
-    const destinationString = `${destinationCoordinates.latitude},${destinationCoordinates.longitude}`
+    const bodyRequest = {
+      origin: {
+        location: {
+          latLng: {
+            latitude: originCoordinates.latitude,
+            longitude: originCoordinates.longitude,
+          },
+        },
+      },
 
-    const url = `${baseUrl}?origins=${originString}&destinations=${destinationString}&key=${googleMapsApiKey}`
+      destination: {
+        location: {
+          latLng: {
+            latitude: destinationCoordinates.latitude,
+            longitude: destinationCoordinates.longitude,
+          },
+        },
+      },
+
+      routing_preference: 'TRAFFIC_AWARE',
+      travel_mode: 'DRIVE',
+    }
 
     try {
-      const response = await axios.get(url)
+      const response = await axios.post<GetRideDetailsApiResponse>(
+        baseUrl,
+        bodyRequest,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Goog-FieldMask': 'routes.duration,routes.distanceMeters',
+            'X-Goog-Api-Key': googleMapsApiKey,
+          },
+        },
+      )
 
-      if (response.data.status === 'OK') {
-        const element = response.data.rows[0].elements[0]
+      const { distanceMeters, duration } = response.data.routes[0]
 
-        if (element.status === 'OK') {
-          const distance = element.distance.value
-          const duration = element.duration.text
-
-          return {
-            distance,
-            duration,
-          }
-        } else {
-          throw new Error(`Distance matrix error: ${element.status}`)
-        }
-      } else {
-        throw new Error(`Distance matrix error: ${response.data.status}`)
+      return {
+        distanceInMeters: distanceMeters,
+        durationInSeconds: duration,
+        fullRouteResponse: response.data,
       }
     } catch (error) {
       throw new GetRideDetailsError(error)
     }
   }
 }
+// const getRideDetails = new GetRideDetailsService()
 
-// getRideDetails({
-//   originCoordinates: { latitude: -23.4419306, longitude: -46.8068621 },
-//   destinationCoordinates: { latitude: -23.5649224, longitude: -46.6519376 },
-// })
+// getRideDetails
+//   .execute({
+//     originCoordinates: { latitude: -23.4419306, longitude: -46.8068621 },
+//     destinationCoordinates: { latitude: -23.5649224, longitude: -46.6519376 },
+//   })
 //   .then((response) => {
-//     console.log(response.distance)
-//     console.log(response.duration)
+//     console.log(response.distanceInMeters)
+//     console.log(response.durationInSeconds)
+//     console.log(response.fullRouteResponse)
 //   })
 //   .catch((error) => console.error(error))

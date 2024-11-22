@@ -11,8 +11,8 @@ model Customer {
   id        String   @id @default(uuid())
   name      String
   email     String   @unique
-  createdAt DateTime @default(now())
-  Travel    Travel[]
+  createdAt DateTime @default(now()) @map("created_at")
+  rides     Ride[]
 
   @@map("customers")
 }
@@ -24,15 +24,15 @@ model Driver {
   vehicle           String
   rating            Decimal
   comment           String
-  value             Decimal
+  pricePerKilometer Decimal  @map("price_per_kilometer")
   minimumKilometers Int      @map("minimum_kilometers")
   createdAt         DateTime @default(now()) @map("created_at")
-  Travel            Travel[]
+  rides             Ride[]
 
   @@map("drivers")
 }
 
-model Travel {
+model Ride {
   id                   String   @id @default(uuid())
   originLatitude       Decimal  @map("origin_latitude")
   originLongitude      Decimal  @map("origin_longitude")
@@ -48,5 +48,5 @@ model Travel {
   customer Customer @relation(fields: [customerId], references: [id])
   driver   Driver   @relation(fields: [driverId], references: [id])
 
-  @@map("travels")
+  @@map("rides")
 }
