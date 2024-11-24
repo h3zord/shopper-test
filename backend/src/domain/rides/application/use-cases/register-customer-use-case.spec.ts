@@ -24,7 +24,9 @@ describe('Register customer id unit test', () => {
   })
 
   it('should not be able to create a new customer if the email is already registered', async () => {
-    createCustomerInMemory(customersRepository, { email: 'test@test.com' })
+    createCustomerInMemory(customersRepository, {
+      email: 'test@test.com',
+    })
 
     await expect(() =>
       sut.execute({ name: 'John Doe', email: 'test@test.com' }),

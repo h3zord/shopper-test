@@ -40,7 +40,7 @@ describe('Ride estimate unit test', () => {
     vi.spyOn(getRideDetailsService, 'execute').mockResolvedValue({
       distanceInMeters: 615000,
       durationInSeconds: '24000s',
-      fullRouteResponse: {
+      fullRouteApiResponse: {
         routes: [{ distanceMeters: 615000, duration: '24000s' }],
       },
     })
@@ -52,12 +52,14 @@ describe('Ride estimate unit test', () => {
       findDriversByMinDistanceUseCase,
     )
 
-    const { id } = createCustomerInMemory(customersRepository, { id: '1' })
+    const { id } = createCustomerInMemory(customersRepository, {
+      id: '1',
+    })
 
     customerId = id
   })
 
-  it('should not be able to return ride estimate when origin adress is equal destinantion adress', async () => {
+  it('should not be able to return ride estimate when origin adress is equal destination adress', async () => {
     await expect(() =>
       sut.execute({
         customerId,
@@ -86,38 +88,27 @@ describe('Ride estimate unit test', () => {
       destinationAddress,
     })
 
-    expect(response.origin).toEqual(
+    expect(response.originCoordinates).toEqual(
       expect.objectContaining({
         latitude: 37.7749,
         longitude: -122.4194,
       }),
     )
 
-    expect(response.destination).toEqual(
+    expect(response.destinationCoordinates).toEqual(
       expect.objectContaining({
         latitude: 34.0522,
         longitude: -118.2437,
       }),
     )
 
-    expect(response.distance).toEqual(615000)
-    expect(response.duration).toEqual('24000s')
+    expect(response.distanceInMeters).toEqual(615000)
+    expect(response.durationInSeconds).toEqual('24000s')
 
-    expect(response.routeResponse).toEqual(
-      expect.objectContaining({
-        routes: expect.arrayContaining([
-          expect.objectContaining({
-            distanceMeters: 615000,
-            duration: '24000s',
-          }),
-        ]),
-      }),
-    )
-
-    expect(response.options).toEqual(
+    expect(response.driverList).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
-          id: expect.any(String),
+          id: expect.any(Number),
           name: expect.any(String),
           description: expect.any(String),
           vehicle: expect.any(String),
@@ -128,6 +119,17 @@ describe('Ride estimate unit test', () => {
           value: expect.any(Number),
         }),
       ]),
+    )
+
+    expect(response.fullRouteApiResponse).toEqual(
+      expect.objectContaining({
+        routes: expect.arrayContaining([
+          expect.objectContaining({
+            distanceMeters: 615000,
+            duration: '24000s',
+          }),
+        ]),
+      }),
     )
   })
 })

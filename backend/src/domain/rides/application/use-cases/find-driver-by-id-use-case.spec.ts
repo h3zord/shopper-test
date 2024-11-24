@@ -22,9 +22,9 @@ describe('Find driver by id unit test', () => {
   })
 
   it('should not be able to return a driver with invalid id', async () => {
-    createDriverInMemory(driversRepository, { id: '1' })
+    createDriverInMemory(driversRepository, { id: 1 })
 
-    await expect(() => sut.execute({ id: '2' })).rejects.toBeInstanceOf(
+    await expect(() => sut.execute({ id: 2 })).rejects.toBeInstanceOf(
       DriverNotFound,
     )
   })

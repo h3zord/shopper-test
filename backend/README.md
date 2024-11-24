@@ -37,17 +37,17 @@
 ### Esse endpoint deve fazer as seguintes validações
 - [] Os endereços de origem e destino recebidos não podem estar em branco.
 - [] O id do usuário não pode estar em branco.
-- [] Os endereços de origem e destino não podem ser o mesmo endereço.
+- [x] Os endereços de origem e destino não podem ser o mesmo endereço.
 
 ### Após as validações, ele deve:
-- [] Calcular a rota entre a origem e destino usando a API Routes do Google Maps.
-- [] Com base no retorno, deve listar os motoristas disponíveis para a viagem de acordo com a quilometragem mínima que aceitam, cada um com seu respectivo valor.
+- [x] Calcular a rota entre a origem e destino usando a API Routes do Google Maps.
+- [x] Com base no retorno, deve listar os motoristas disponíveis para a viagem de acordo com a quilometragem mínima que aceitam, cada um com seu respectivo valor.
 
 ### O endpoint deverá retornar:
-- [] A resposta original da rota no Google.
-- [] A latitude e longitude dos pontos iniciais e finais.
-- [] A distância e tempo do percurso.
-- [] A lista de motoristas disponíveis ordenados do mais barato para o mais caro, cada um contendo:
+- [x] A resposta original da rota no Google.
+- [x] A latitude e longitude dos pontos iniciais e finais.
+- [x] A distância e tempo do percurso.
+- [x] A lista de motoristas disponíveis ordenados do mais barato para o mais caro, cada um contendo:
 - ID e nome do motorista.
 - A descrição.
 - O carro.
@@ -61,15 +61,15 @@
 ### Esse endpoint deve fazer as seguintes validações:
 - [] Os endereços de origem e destino recebidos não podem estar em branco.
 - [] O id do usuário não pode estar em branco.
-- [] Os endereços de origem e destino não podem ser o mesmo endereço.
-- [] Uma opção de motorista foi informada e é uma opção válida.
-- [] A quilometragem informada realmente é válida para o motorista selecionado.
+- [x] Os endereços de origem e destino não podem ser o mesmo endereço.
+- [x] Uma opção de motorista foi informada e é uma opção válida.
+- [x] A quilometragem informada realmente é válida para o motorista selecionado.
 
 ### Após as validações ele deve:
-- [] Salvar no banco de dados os dados da viagem realizada.
+- [x] Salvar no banco de dados os dados da viagem realizada.
 
 ### Ele NÃO deve fazer:
-- [] Recalcular a rota usando a API do Google Maps.
+- [x] Recalcular a rota usando a API do Google Maps.
 
 ### Ela irá retornar:
 - [] Resposta de OK ou ERRO dependendo do valor informado.

@@ -25,7 +25,7 @@ export class RegisterCustomerUseCase {
       throw new CustomerAlreadyExists()
     }
 
-    const customer = await this.customersRepository.register({
+    const customer = await this.customersRepository.registerCustomer({
       name,
       email,
     })

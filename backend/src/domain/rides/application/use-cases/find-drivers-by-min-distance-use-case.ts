@@ -7,7 +7,7 @@ interface FindDriverByMinDistanceUseCaseRequest {
 
 interface FindDriverByMinDistanceUseCaseResponse {
   driverList: {
-    id: string
+    id: number
     name: string
     description: string
     vehicle: string

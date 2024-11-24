@@ -13,17 +13,17 @@ describe('Find driver by minimum distance unit test', () => {
 
     createDriverInMemory(driversRepository, {
       pricePerKilometer: 10,
-      minimumKilometers: 10,
+      minimumMeters: 10000,
     })
 
     createDriverInMemory(driversRepository, {
       pricePerKilometer: 1,
-      minimumKilometers: 1,
+      minimumMeters: 1000,
     })
 
     createDriverInMemory(driversRepository, {
       pricePerKilometer: 5,
-      minimumKilometers: 5,
+      minimumMeters: 5000,
     })
   })
 

@@ -40,7 +40,7 @@ export class RideEstimateUseCase {
         destinationAddress,
       })
 
-    const { distanceInMeters, durationInSeconds, fullRouteResponse } =
+    const { distanceInMeters, durationInSeconds, fullRouteApiResponse } =
       await this.getRideDetailsService.execute({
         originCoordinates,
         destinationCoordinates,
@@ -51,12 +51,12 @@ export class RideEstimateUseCase {
     })
 
     return {
-      origin: originCoordinates,
-      destination: destinationCoordinates,
-      distance: distanceInMeters,
-      duration: durationInSeconds,
-      routeResponse: fullRouteResponse,
-      options: driverList,
+      originCoordinates,
+      destinationCoordinates,
+      distanceInMeters,
+      durationInSeconds,
+      driverList,
+      fullRouteApiResponse,
     }
   }
 }

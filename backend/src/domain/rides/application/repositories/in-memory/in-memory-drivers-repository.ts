@@ -4,7 +4,7 @@ import { DriversRepository } from '../contracts/drivers-repository'
 export class InMemoryDriversRepository implements DriversRepository {
   public items: Driver[] = []
 
-  async findDriverById(id: string) {
+  async findDriverById(id: number) {
     const driver = this.items.find((driver) => driver.id === id)
 
     if (!driver) {
@@ -16,9 +16,7 @@ export class InMemoryDriversRepository implements DriversRepository {
 
   async findDriversByMinDistance(distanceInMeters: number) {
     const unsortedDriverList = this.items.filter((driver) => {
-      const distanceInKilometers = distanceInMeters / 1000
-
-      return distanceInKilometers >= driver.minimumKilometers
+      return distanceInMeters >= driver.minimumMeters
     })
 
     const sortedDriverListByPrice = unsortedDriverList.sort(

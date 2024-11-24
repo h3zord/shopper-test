@@ -5,12 +5,12 @@ import { randomUUID } from 'node:crypto'
 export class InMemoryCustomersRepository implements CustomersRepository {
   public items: Customer[] = []
 
-  async register(data: Prisma.CustomerCreateInput) {
+  async registerCustomer(data: Prisma.CustomerCreateInput) {
     const customer: Customer = {
       id: data.id ?? randomUUID(),
       name: data.name,
       email: data.email,
-      createdAt: new Date(),
+      createdAt: data.createdAt ? new Date(data.createdAt) : new Date(),
     }
 
     this.items.push(customer)

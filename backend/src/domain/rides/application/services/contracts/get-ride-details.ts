@@ -21,6 +21,6 @@ export interface GetRideDetails {
   execute(props: GetRideDetailsProps): Promise<{
     distanceInMeters: number
     durationInSeconds: string
-    fullRouteResponse: GetRideDetailsApiResponse
+    fullRouteApiResponse: GetRideDetailsApiResponse
   }>
 }

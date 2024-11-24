@@ -18,14 +18,14 @@ model Customer {
 }
 
 model Driver {
-  id                String   @id @default(uuid())
+  id                Int      @id @default(autoincrement())
   name              String
   description       String
   vehicle           String
   rating            Decimal
   comment           String
   pricePerKilometer Decimal  @map("price_per_kilometer")
-  minimumKilometers Int      @map("minimum_kilometers")
+  minimumMeters     Int      @map("minimum_meters")
   createdAt         DateTime @default(now()) @map("created_at")
   rides             Ride[]
 
@@ -33,16 +33,16 @@ model Driver {
 }
 
 model Ride {
-  id                   String   @id @default(uuid())
+  id                   Int      @id @default(autoincrement())
   originLatitude       Decimal  @map("origin_latitude")
   originLongitude      Decimal  @map("origin_longitude")
   destinationLatitude  Decimal  @map("destination_latitude")
   destinationLongitude Decimal  @map("destination_longitude")
-  distanceInMeters     Decimal  @map("distance_in_meters")
+  distanceInMeters     Int      @map("distance_in_meters")
   durationInSeconds    Int      @map("duration_in_seconds")
   value                Decimal
   customerId           String   @map("customer_id")
-  driverId             String   @map("driver_id")
+  driverId             Int      @map("driver_id")
   createdAt            DateTime @default(now()) @map("created_at")
 
   customer Customer @relation(fields: [customerId], references: [id])

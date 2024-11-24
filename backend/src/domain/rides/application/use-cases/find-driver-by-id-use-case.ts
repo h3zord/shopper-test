@@ -3,7 +3,7 @@ import { DriversRepository } from '../repositories/contracts/drivers-repository'
 import { DriverNotFound } from './errors/driver-not-found'
 
 interface FindDriverByIdUseCaseRequest {
-  id: string
+  id: number
 }
 
 interface FindDriverByIdUseCaseResponse {

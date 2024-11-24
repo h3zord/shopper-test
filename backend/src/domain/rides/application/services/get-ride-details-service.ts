@@ -25,7 +25,7 @@ interface GetRideDetailsApiResponse {
 interface GetRideDetailsServiceResponse {
   distanceInMeters: number
   durationInSeconds: string
-  fullRouteResponse: GetRideDetailsApiResponse
+  fullRouteApiResponse: GetRideDetailsApiResponse
 }
 
 export class GetRideDetailsService implements GetRideDetails {
@@ -78,7 +78,7 @@ export class GetRideDetailsService implements GetRideDetails {
       return {
         distanceInMeters: distanceMeters,
         durationInSeconds: duration,
-        fullRouteResponse: response.data,
+        fullRouteApiResponse: response.data,
       }
     } catch (error) {
       throw new GetRideDetailsError(error)
