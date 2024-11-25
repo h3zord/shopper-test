@@ -85,6 +85,7 @@ export class GetRideDetailsService implements GetRideDetails {
     }
   }
 }
+
 // const getRideDetails = new GetRideDetailsService()
 
 // getRideDetails
@@ -95,6 +96,6 @@ export class GetRideDetailsService implements GetRideDetails {
 //   .then((response) => {
 //     console.log(response.distanceInMeters)
 //     console.log(response.durationInSeconds)
-//     console.log(response.fullRouteResponse)
+//     console.log(response.fullRouteApiResponse)
 //   })
 //   .catch((error) => console.error(error))

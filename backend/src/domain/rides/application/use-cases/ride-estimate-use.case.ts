@@ -51,12 +51,18 @@ export class RideEstimateUseCase {
     })
 
     return {
-      originCoordinates,
-      destinationCoordinates,
-      distanceInMeters,
-      durationInSeconds,
-      driverList,
-      fullRouteApiResponse,
+      origin: {
+        latitude: originCoordinates.latitude,
+        longitude: originCoordinates.longitude,
+      },
+      destination: {
+        latitude: destinationCoordinates.latitude,
+        longitude: destinationCoordinates.longitude,
+      },
+      distance: distanceInMeters,
+      duration: durationInSeconds,
+      options: driverList,
+      routeResponse: fullRouteApiResponse,
     }
   }
 }

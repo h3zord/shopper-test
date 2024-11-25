@@ -88,24 +88,24 @@ describe('Ride estimate unit test', () => {
       destinationAddress,
     })
 
-    expect(response.originCoordinates).toEqual(
+    expect(response.origin).toEqual(
       expect.objectContaining({
         latitude: 37.7749,
         longitude: -122.4194,
       }),
     )
 
-    expect(response.destinationCoordinates).toEqual(
+    expect(response.destination).toEqual(
       expect.objectContaining({
         latitude: 34.0522,
         longitude: -118.2437,
       }),
     )
 
-    expect(response.distanceInMeters).toEqual(615000)
-    expect(response.durationInSeconds).toEqual('24000s')
+    expect(response.distance).toEqual(615000)
+    expect(response.duration).toEqual('24000s')
 
-    expect(response.driverList).toEqual(
+    expect(response.options).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
           id: expect.any(Number),
@@ -121,7 +121,7 @@ describe('Ride estimate unit test', () => {
       ]),
     )
 
-    expect(response.fullRouteApiResponse).toEqual(
+    expect(response.routeResponse).toEqual(
       expect.objectContaining({
         routes: expect.arrayContaining([
           expect.objectContaining({

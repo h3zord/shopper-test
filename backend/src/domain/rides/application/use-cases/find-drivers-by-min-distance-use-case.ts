@@ -27,7 +27,7 @@ interface DriverListMapProps {
 export class FindDriverByMinDistanceUseCase {
   constructor(private driversRepository: DriversRepository) {}
 
-  private calculateDriverEstimates({
+  private generateDriverEstimateList({
     driverList,
     distanceInMeters,
   }: DriverListMapProps) {
@@ -54,7 +54,7 @@ export class FindDriverByMinDistanceUseCase {
     const driverList =
       await this.driversRepository.findDriversByMinDistance(distanceInMeters)
 
-    const driverListMapped = this.calculateDriverEstimates({
+    const driverListMapped = this.generateDriverEstimateList({
       driverList,
       distanceInMeters,
     })

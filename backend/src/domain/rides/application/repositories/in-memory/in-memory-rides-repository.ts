@@ -6,14 +6,15 @@ import { InMemoryDriversRepository } from './in-memory-drivers-repository'
 interface GetRidesProps {
   customerId: string
   driverId: number
-  driversRepository: InMemoryDriversRepository
 }
 
 export class InMemoryRidesRepository implements RidesRepository {
   public items: Ride[] = []
   private autoIncrementId = 0
 
-  async getRides({ customerId, driverId, driversRepository }: GetRidesProps) {
+  constructor(private driversRepository: InMemoryDriversRepository) {}
+
+  async getRides({ customerId, driverId }: GetRidesProps) {
     const rideList = this.items.filter((ride) => {
       if (driverId) {
         return ride.customerId === customerId && ride.driverId === driverId
@@ -22,8 +23,12 @@ export class InMemoryRidesRepository implements RidesRepository {
       }
     })
 
-    const rideListWithDriverName = rideList.map((ride) => {
-      const driverData = driversRepository.items.find(
+    const sortedRideList = rideList.sort(
+      (a, b) => b.createdAt.getTime() - a.createdAt.getTime(),
+    )
+
+    const rideListWithDriverName = sortedRideList.map((ride) => {
+      const driverData = this.driversRepository.items.find(
         (driver) => driver.id === ride.driverId,
       )
 

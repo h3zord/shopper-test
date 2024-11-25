@@ -30,7 +30,7 @@ export class GetAddressService implements GetAddress {
 
     const baseUrl = 'https://maps.googleapis.com/maps/api/geocode/json'
 
-    const url = `${baseUrl}?latlng=${coordinates.latitude},${coordinates.longitude}&key=${googleMapsApiKey}`
+    const url = `${baseUrl}?latlng=${coordinates.latitude},${coordinates.longitude}&key=${googleMapsApiKey}&language=pt`
 
     try {
       const response = await axios.get(url)
@@ -75,8 +75,8 @@ export class GetAddressService implements GetAddress {
 
 // getAddressService
 //   .execute({
-//     originCoordinates: { latitude: -23.55052, longitude: -46.633308 },
-//     destinationCoordinates: { latitude: -22.906847, longitude: -43.172896 },
+//     originCoordinates: { latitude: -23.4419306, longitude: -46.8068621 },
+//     destinationCoordinates: { latitude: -23.5649224, longitude: -46.6519376 },
 //   })
 //   .then((result) => {
 //     console.log('Origin Address:', result.originAddress)

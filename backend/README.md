@@ -2,9 +2,9 @@
 
 ## User
 ### Requisitos funcionais
-- [] O usuário poderá solicitar uma viagem em carro particular de um ponto A até um ponto B.
-- [] Ele poderá escolher entre algumas opções de motoristas e valores e confirmar a viagem.
-- [] Depois também poderá listar o histórico das viagens realizadas.
+- [x] O usuário poderá solicitar uma viagem em carro particular de um ponto A até um ponto B.
+- [x] Ele poderá escolher entre algumas opções de motoristas e valores e confirmar a viagem.
+- [x] Depois também poderá listar o histórico das viagens realizadas.
 
 ### Requisitos não funcionais
 - [x] O usuário precisa ter um ID único.
@@ -83,8 +83,8 @@
 - [x] Se um id de motorista for informado, ele precisa ser um id válido.
 
 ### Após as validações ele:
-- [] Buscar as viagens realizadas pelo usuário, ordenando da mais recente para a mais antiga.
-- [] Pode receber um query parameter “driver_id” que, se informado, deve filtrar apenas as viagens realizadas pelo usuário com este motorista.
+- [x] Buscar as viagens realizadas pelo usuário, ordenando da mais recente para a mais antiga.
+- [x] Pode receber um query parameter “driver_id” que, se informado, deve filtrar apenas as viagens realizadas pelo usuário com este motorista.
 
 ### Ela irá retornar:
 - [] Uma lista com as viagens realizadas.
