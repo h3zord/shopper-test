@@ -98,7 +98,7 @@ describe('Ride confirm unit test', () => {
     ).rejects.toBeInstanceOf(DriverNotFound)
   })
 
-  it('should not be able to confirm ride when the distance is less than driver minimum distance', async () => {
+  it('Should not be able to confirm a ride when the distance is less than the drivers minimum distance', async () => {
     await expect(() =>
       sut.execute({
         customerId,

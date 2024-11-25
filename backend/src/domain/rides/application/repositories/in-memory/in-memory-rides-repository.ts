@@ -1,10 +1,51 @@
 import { Prisma, Ride } from '@prisma/client'
 import { RidesRepository } from '../contracts/rides-repository'
 import { Decimal } from '@prisma/client/runtime/library'
+import { InMemoryDriversRepository } from './in-memory-drivers-repository'
+
+interface GetRidesProps {
+  customerId: string
+  driverId: number
+  driversRepository: InMemoryDriversRepository
+}
 
 export class InMemoryRidesRepository implements RidesRepository {
   public items: Ride[] = []
   private autoIncrementId = 0
+
+  async getRides({ customerId, driverId, driversRepository }: GetRidesProps) {
+    const rideList = this.items.filter((ride) => {
+      if (driverId) {
+        return ride.customerId === customerId && ride.driverId === driverId
+      } else {
+        return ride.customerId === customerId
+      }
+    })
+
+    const rideListWithDriverName = rideList.map((ride) => {
+      const driverData = driversRepository.items.find(
+        (driver) => driver.id === ride.driverId,
+      )
+
+      return {
+        id: ride.id,
+        date: ride.createdAt,
+        originLatitude: ride.originLatitude,
+        originLongitude: ride.originLongitude,
+        destinationLatitude: ride.destinationLatitude,
+        destinationLongitude: ride.destinationLongitude,
+        distanceInMeters: ride.distanceInMeters,
+        durationInSeconds: ride.durationInSeconds,
+        driver: {
+          id: driverData!.id,
+          name: driverData!.name,
+        },
+        value: ride.value,
+      }
+    })
+
+    return rideListWithDriverName
+  }
 
   async registerRide(data: Prisma.RideUncheckedCreateInput) {
     const ride: Ride = {

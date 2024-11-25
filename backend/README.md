@@ -80,7 +80,7 @@
 
 ### Esse endpoint deve fazer as seguintes validações:
 - [] O id do usuário não pode estar em branco.
-- [] Se um id de motorista for informado, ele precisa ser um id válido.
+- [x] Se um id de motorista for informado, ele precisa ser um id válido.
 
 ### Após as validações ele:
 - [] Buscar as viagens realizadas pelo usuário, ordenando da mais recente para a mais antiga.
