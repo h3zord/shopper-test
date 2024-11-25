@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import { z } from 'zod'
 import { makeFindDriverByIdUseCase } from '../../../../domain/rides/application/use-cases/factories/make-find-driver-by-id-use-case'
-import { DriverNotFound } from '../../../../domain/rides/application/use-cases/errors/driver-not-found'
+import { handleControllerErrors } from '../errors/handle-controller-errors'
 
 export async function findDriverByIdController(req: Request, res: Response) {
   const findDriverByIdParamsSchema = z.object({
@@ -19,13 +19,6 @@ export async function findDriverByIdController(req: Request, res: Response) {
 
     return res.status(200).json({ driver })
   } catch (error) {
-    if (error instanceof DriverNotFound) {
-      return res.status(404).json({
-        error_code: 'DRIVER_NOT_FOUND',
-        error_description: error.message,
-      })
-    }
-
-    throw error
+    handleControllerErrors(error, res)
   }
 }

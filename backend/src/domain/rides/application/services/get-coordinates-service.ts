@@ -2,6 +2,7 @@ import axios from 'axios'
 
 import { GetCoordinatesError } from './errors/get-coordinates-error'
 import { GetCoordinates } from './contracts/get-coordinates'
+import { InvalidData } from '../use-cases/errors/invalid-data'
 
 interface Coordinates {
   latitude: number
@@ -58,6 +59,13 @@ export class GetCoordinatesService implements GetCoordinates {
 
       const destinationCoordinates =
         await this.convertAddressToCoordinates(destinationAddress)
+
+      if (
+        originCoordinates.latitude === destinationCoordinates.latitude &&
+        originCoordinates.longitude === destinationCoordinates.longitude
+      ) {
+        throw new InvalidData()
+      }
 
       return {
         originCoordinates,

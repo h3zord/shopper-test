@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import { z } from 'zod'
 import { makeRegisterCustomerUseCase } from '../../../../domain/rides/application/use-cases/factories/make-register-customer-use-case'
-import { CustomerAlreadyExists } from '../../../../domain/rides/application/use-cases/errors/customer-already-exsists'
+import { handleControllerErrors } from '../errors/handle-controller-errors'
 
 export async function registerCustomerController(req: Request, res: Response) {
   const registerCustomerBodySchema = z.object({
@@ -14,20 +14,13 @@ export async function registerCustomerController(req: Request, res: Response) {
   const registerCustomerUseCase = makeRegisterCustomerUseCase()
 
   try {
-    await registerCustomerUseCase.execute({
+    const { customer } = await registerCustomerUseCase.execute({
       name,
       email,
     })
 
-    return res.status(201).json({ sucess: true })
+    return res.status(201).json({ customer })
   } catch (error) {
-    if (error instanceof CustomerAlreadyExists) {
-      return res.status(409).json({
-        error_code: 'CUSTOMER_ALREADY_EXISTS',
-        error_description: error.message,
-      })
-    }
-
-    throw error
+    handleControllerErrors(error, res)
   }
 }

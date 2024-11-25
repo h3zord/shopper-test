@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import { z } from 'zod'
 import { makeFindCustomerByEmailUseCase } from '../../../../domain/rides/application/use-cases/factories/make-find-customer-by-email-use-case'
-import { CustomerNotFound } from '../../../../domain/rides/application/use-cases/errors/customer-not-found'
+import { handleControllerErrors } from '../errors/handle-controller-errors'
 
 export async function findCustomerByEmailController(
   req: Request,
@@ -20,15 +20,8 @@ export async function findCustomerByEmailController(
       email,
     })
 
-    return res.status(200).json({ id: customer.id })
+    return res.status(200).json({ customer })
   } catch (error) {
-    if (error instanceof CustomerNotFound) {
-      return res.status(404).json({
-        error_code: 'CUSTOMER_NOT_FOUND',
-        error_description: error.message,
-      })
-    }
-
-    throw error
+    handleControllerErrors(error, res)
   }
 }
