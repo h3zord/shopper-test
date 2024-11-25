@@ -1,6 +1,6 @@
 import { Prisma } from '@prisma/client'
 import { CustomersRepository } from '../contracts/customers-repository'
-import { prisma } from '../../../../../lib/prisma'
+import { prisma } from '../../../../../infra/database/prisma'
 
 export class PrismaCustomerRepository implements CustomersRepository {
   async registerCustomer(data: Prisma.CustomerCreateInput) {

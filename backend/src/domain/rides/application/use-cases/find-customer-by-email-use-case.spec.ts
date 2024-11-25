@@ -1,31 +1,35 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 import { InMemoryCustomersRepository } from '../../../../tests/repositories/in-memory-customers-repository'
-import { CustomerNotFound } from './errors/customer-not-found'
-import { FindCustomerByEmailUseCase } from './find-customer-by-email-use-case'
+import { RegisterCustomerUseCase } from './register-customer-use-case'
+import { CustomerAlreadyExists } from './errors/customer-already-exsists'
 import { createCustomerInMemory } from '../../../../tests/factories/create-customer-in-memory'
 
-describe('Find customer by email unit test', () => {
+describe('Register customer id unit test', () => {
   let customersRepository: InMemoryCustomersRepository
-  let sut: FindCustomerByEmailUseCase
+  let sut: RegisterCustomerUseCase
 
   beforeEach(async () => {
     customersRepository = new InMemoryCustomersRepository()
-    sut = new FindCustomerByEmailUseCase(customersRepository)
+    sut = new RegisterCustomerUseCase(customersRepository)
   })
 
-  it('should be able to return a customer', async () => {
-    const { email } = createCustomerInMemory(customersRepository)
+  it('should be able to create a new customer', async () => {
+    const { customer } = await sut.execute({
+      name: 'John Doe',
+      email: 'test@test.com',
+    })
 
-    const { customer } = await sut.execute({ email })
-
-    expect(customer.email).toEqual(email)
+    expect(customer.id).toEqual(expect.any(String))
+    expect(customer.email).toEqual('test@test.com')
   })
 
-  it('should not be able to return a customer with invalid email', async () => {
-    createCustomerInMemory(customersRepository, { email: 'test@test.com' })
+  it('should not be able to create a new customer if the email is already registered', async () => {
+    createCustomerInMemory(customersRepository, {
+      email: 'test@test.com',
+    })
 
     await expect(() =>
-      sut.execute({ email: 'invalid@email.com' }),
-    ).rejects.toBeInstanceOf(CustomerNotFound)
+      sut.execute({ name: 'John Doe', email: 'test@test.com' }),
+    ).rejects.toBeInstanceOf(CustomerAlreadyExists)
   })
 })

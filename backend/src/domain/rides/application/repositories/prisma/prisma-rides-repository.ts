@@ -1,6 +1,6 @@
 import { Prisma } from '@prisma/client'
 import { RidesRepository } from '../contracts/rides-repository'
-import { prisma } from '../../../../../lib/prisma'
+import { prisma } from '../../../../../infra/database/prisma'
 
 interface GetRidesProps {
   customerId: string
