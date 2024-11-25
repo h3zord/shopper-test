@@ -13,10 +13,10 @@ interface RideEstimateUseCaseRequest {
 
 export class RideEstimateUseCase {
   constructor(
-    private customersRepository: CustomersRepository,
     private getCoordinatesService: GetCoordinates,
     private getRideDetailsService: GetRideDetails,
     private findDriversByMinDistanceUseCase: FindDriverByMinDistanceUseCase,
+    private customersRepository: CustomersRepository,
   ) {}
 
   async execute({
