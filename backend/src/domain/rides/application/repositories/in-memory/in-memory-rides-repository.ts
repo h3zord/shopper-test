@@ -34,7 +34,6 @@ export class InMemoryRidesRepository implements RidesRepository {
 
       return {
         id: ride.id,
-        date: ride.createdAt,
         originLatitude: ride.originLatitude,
         originLongitude: ride.originLongitude,
         destinationLatitude: ride.destinationLatitude,
@@ -46,6 +45,7 @@ export class InMemoryRidesRepository implements RidesRepository {
           name: driverData!.name,
         },
         value: ride.value,
+        createdAt: ride.createdAt,
       }
     })
 

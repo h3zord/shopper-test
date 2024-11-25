@@ -38,7 +38,7 @@ export class GetRidesUseCase {
 
         return {
           id: ride.id,
-          date: ride.date,
+          date: ride.createdAt,
           origin: originAddress,
           destination: destinationAddress,
           distance: ride.distanceInMeters,

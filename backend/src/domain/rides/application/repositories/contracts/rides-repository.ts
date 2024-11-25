@@ -7,7 +7,6 @@ interface GetRidesProps {
 
 export interface GetRidesResponse {
   id: number
-  date: Date
   originLatitude: Prisma.Decimal
   originLongitude: Prisma.Decimal
   destinationLatitude: Prisma.Decimal
@@ -19,6 +18,7 @@ export interface GetRidesResponse {
     name: string
   }
   value: Prisma.Decimal
+  createdAt: Date
 }
 
 export interface RidesRepository {
