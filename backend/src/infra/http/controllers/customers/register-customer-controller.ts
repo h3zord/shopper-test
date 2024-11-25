@@ -22,7 +22,10 @@ export async function registerCustomerController(req: Request, res: Response) {
     return res.status(201).json({ sucess: true })
   } catch (error) {
     if (error instanceof CustomerAlreadyExists) {
-      return res.status(400).json({ message: error.message })
+      return res.status(409).json({
+        error_code: 'CUSTOMER_ALREADY_EXISTS',
+        error_description: error.message,
+      })
     }
 
     throw error

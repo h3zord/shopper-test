@@ -20,7 +20,10 @@ export async function findCustomerByIdController(req: Request, res: Response) {
     return res.status(200).json({ customer })
   } catch (error) {
     if (error instanceof CustomerNotFound) {
-      return res.status(400).json({ message: error.message })
+      return res.status(404).json({
+        error_code: 'CUSTOMER_NOT_FOUND',
+        error_description: error.message,
+      })
     }
 
     throw error
