@@ -1,8 +1,8 @@
 import { beforeEach, describe, expect, it } from 'vitest'
-import { InMemoryDriversRepository } from '../repositories/in-memory/in-memory-drivers-repository'
+import { InMemoryDriversRepository } from '../../../../tests/repositories/in-memory-drivers-repository'
 import { DriverNotFound } from './errors/driver-not-found'
 import { FindDriverByIdUseCase } from './find-driver-by-id-use-case'
-import { createDriverInMemory } from '../../../../utils/tests/create-driver-in-memory'
+import { createDriverInMemory } from '../../../../tests/factories/create-driver-in-memory'
 
 describe('Find driver by id unit test', () => {
   let driversRepository: InMemoryDriversRepository

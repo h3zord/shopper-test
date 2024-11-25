@@ -1,5 +1,5 @@
 import { Prisma, Ride } from '@prisma/client'
-import { RidesRepository } from '../contracts/rides-repository'
+import { RidesRepository } from '../../domain/rides/application/repositories/contracts/rides-repository'
 import { Decimal } from '@prisma/client/runtime/library'
 import { InMemoryDriversRepository } from './in-memory-drivers-repository'
 

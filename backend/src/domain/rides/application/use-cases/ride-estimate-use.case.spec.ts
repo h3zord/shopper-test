@@ -1,14 +1,14 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { FindDriverByMinDistanceUseCase } from './find-drivers-by-min-distance-use-case'
-import { InMemoryCustomersRepository } from '../repositories/in-memory/in-memory-customers-repository'
+import { InMemoryCustomersRepository } from '../../../../tests/repositories/in-memory-customers-repository'
 import { RideEstimateUseCase } from './ride-estimate-use.case'
 import { GetCoordinatesService } from '../services/get-coordinates-service'
 import { GetRideDetailsService } from '../services/get-ride-details-service'
-import { InMemoryDriversRepository } from '../repositories/in-memory/in-memory-drivers-repository'
-import { createCustomerInMemory } from '../../../../utils/tests/create-customer-in-memory'
+import { InMemoryDriversRepository } from '../../../../tests/repositories/in-memory-drivers-repository'
 import { InvalidData } from './errors/invalid-data'
 import { CustomerNotFound } from './errors/customer-not-found'
-import { createDriverInMemory } from '../../../../utils/tests/create-driver-in-memory'
+import { createCustomerInMemory } from '../../../../tests/factories/create-customer-in-memory'
+import { createDriverInMemory } from '../../../../tests/factories/create-driver-in-memory'
 
 describe('Ride estimate unit test', () => {
   let customersRepository: InMemoryCustomersRepository
@@ -46,10 +46,10 @@ describe('Ride estimate unit test', () => {
     })
 
     sut = new RideEstimateUseCase(
-      customersRepository,
       getCoordinatesService,
       getRideDetailsService,
       findDriversByMinDistanceUseCase,
+      customersRepository,
     )
 
     const { id } = createCustomerInMemory(customersRepository, {

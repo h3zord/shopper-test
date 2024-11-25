@@ -1,7 +1,7 @@
 import { Driver, Prisma } from '@prisma/client'
 import { faker } from '@faker-js/faker'
-import { InMemoryDriversRepository } from '../../domain/rides/application/repositories/in-memory/in-memory-drivers-repository'
 import { Decimal } from '@prisma/client/runtime/library'
+import { InMemoryDriversRepository } from '../repositories/in-memory-drivers-repository'
 
 export function createDriverInMemory(
   driversRepository: InMemoryDriversRepository,

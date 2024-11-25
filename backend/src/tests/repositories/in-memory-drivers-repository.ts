@@ -1,5 +1,5 @@
 import { Driver } from '@prisma/client'
-import { DriversRepository } from '../contracts/drivers-repository'
+import { DriversRepository } from '../../domain/rides/application/repositories/contracts/drivers-repository'
 
 export class InMemoryDriversRepository implements DriversRepository {
   public items: Driver[] = []

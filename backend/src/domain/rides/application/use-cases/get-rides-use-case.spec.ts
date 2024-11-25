@@ -1,14 +1,14 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { InMemoryCustomersRepository } from '../repositories/in-memory/in-memory-customers-repository'
-import { InMemoryDriversRepository } from '../repositories/in-memory/in-memory-drivers-repository'
-import { createCustomerInMemory } from '../../../../utils/tests/create-customer-in-memory'
+import { InMemoryCustomersRepository } from '../../../../tests/repositories/in-memory-customers-repository'
+import { InMemoryDriversRepository } from '../../../../tests/repositories/in-memory-drivers-repository'
 import { CustomerNotFound } from './errors/customer-not-found'
-import { createDriverInMemory } from '../../../../utils/tests/create-driver-in-memory'
-import { InMemoryRidesRepository } from '../repositories/in-memory/in-memory-rides-repository'
+import { InMemoryRidesRepository } from '../../../../tests/repositories/in-memory-rides-repository'
 import { DriverNotFound } from './errors/driver-not-found'
 import { GetRidesUseCase } from './get-rides-use-case'
 import { GetAddressService } from '../services/get-address-service'
-import { createRideInMemory } from '../../../../utils/tests/create-ride-in-memory'
+import { createCustomerInMemory } from '../../../../tests/factories/create-customer-in-memory'
+import { createDriverInMemory } from '../../../../tests/factories/create-driver-in-memory'
+import { createRideInMemory } from '../../../../tests/factories/create-ride-in-memory'
 
 describe('Get rides unit test', () => {
   let customersRepository: InMemoryCustomersRepository

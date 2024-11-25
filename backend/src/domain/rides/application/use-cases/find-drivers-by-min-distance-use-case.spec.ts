@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it } from 'vitest'
-import { InMemoryDriversRepository } from '../repositories/in-memory/in-memory-drivers-repository'
-import { createDriverInMemory } from '../../../../utils/tests/create-driver-in-memory'
+import { InMemoryDriversRepository } from '../../../../tests/repositories/in-memory-drivers-repository'
 import { FindDriverByMinDistanceUseCase } from './find-drivers-by-min-distance-use-case'
+import { createDriverInMemory } from '../../../../tests/factories/create-driver-in-memory'
 
 describe('Find driver by minimum distance unit test', () => {
   let driversRepository: InMemoryDriversRepository

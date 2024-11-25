@@ -1,5 +1,5 @@
 import { Customer, Prisma } from '@prisma/client'
-import { CustomersRepository } from '../contracts/customers-repository'
+import { CustomersRepository } from '../../domain/rides/application/repositories/contracts/customers-repository'
 import { randomUUID } from 'node:crypto'
 
 export class InMemoryCustomersRepository implements CustomersRepository {

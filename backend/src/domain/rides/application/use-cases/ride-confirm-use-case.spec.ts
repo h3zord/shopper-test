@@ -1,15 +1,15 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { InMemoryCustomersRepository } from '../repositories/in-memory/in-memory-customers-repository'
+import { InMemoryCustomersRepository } from '../../../../tests/repositories/in-memory-customers-repository'
 import { GetCoordinatesService } from '../services/get-coordinates-service'
-import { InMemoryDriversRepository } from '../repositories/in-memory/in-memory-drivers-repository'
-import { createCustomerInMemory } from '../../../../utils/tests/create-customer-in-memory'
+import { InMemoryDriversRepository } from '../../../../tests/repositories/in-memory-drivers-repository'
 import { InvalidData } from './errors/invalid-data'
 import { CustomerNotFound } from './errors/customer-not-found'
-import { createDriverInMemory } from '../../../../utils/tests/create-driver-in-memory'
 import { RideConfirmUseCase } from './ride-confirm-use-case'
-import { InMemoryRidesRepository } from '../repositories/in-memory/in-memory-rides-repository'
+import { InMemoryRidesRepository } from '../../../../tests/repositories/in-memory-rides-repository'
 import { DriverNotFound } from './errors/driver-not-found'
 import { InvalidDistance } from './errors/invalid-distance'
+import { createCustomerInMemory } from '../../../../tests/factories/create-customer-in-memory'
+import { createDriverInMemory } from '../../../../tests/factories/create-driver-in-memory'
 
 describe('Ride confirm unit test', () => {
   let customersRepository: InMemoryCustomersRepository
@@ -27,7 +27,7 @@ describe('Ride confirm unit test', () => {
   beforeEach(async () => {
     customersRepository = new InMemoryCustomersRepository()
     driversRepository = new InMemoryDriversRepository()
-    ridesRepository = new InMemoryRidesRepository()
+    ridesRepository = new InMemoryRidesRepository(driversRepository)
     getCoordinatesService = new GetCoordinatesService()
 
     vi.spyOn(getCoordinatesService, 'execute').mockResolvedValue({

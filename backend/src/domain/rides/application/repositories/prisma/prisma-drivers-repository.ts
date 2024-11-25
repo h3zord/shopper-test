@@ -1,6 +1,6 @@
 import { Driver } from '@prisma/client'
 import { DriversRepository } from '../contracts/drivers-repository'
-import { prisma } from '../../../../../prisma/prisma'
+import { prisma } from '../../../../../lib/prisma'
 
 export class PrismaDriversRepository implements DriversRepository {
   async findDriverById(id: number) {

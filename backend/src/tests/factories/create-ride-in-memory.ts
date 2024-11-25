@@ -1,8 +1,8 @@
 import { Prisma, Ride } from '@prisma/client'
-import { InMemoryRidesRepository } from '../../domain/rides/application/repositories/in-memory/in-memory-rides-repository'
 import { Decimal } from '@prisma/client/runtime/library'
 import { randomUUID } from 'crypto'
 import { faker } from '@faker-js/faker'
+import { InMemoryRidesRepository } from '../repositories/in-memory-rides-repository'
 
 export function createRideInMemory(
   ridesRepository: InMemoryRidesRepository,

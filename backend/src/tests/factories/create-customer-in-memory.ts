@@ -1,7 +1,7 @@
 import { Customer, Prisma } from '@prisma/client'
 import { randomUUID } from 'crypto'
 import { faker } from '@faker-js/faker'
-import { InMemoryCustomersRepository } from '../../domain/rides/application/repositories/in-memory/in-memory-customers-repository'
+import { InMemoryCustomersRepository } from '../repositories/in-memory-customers-repository'
 
 export function createCustomerInMemory(
   customersRepository: InMemoryCustomersRepository,
