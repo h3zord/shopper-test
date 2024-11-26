@@ -12,7 +12,7 @@ export async function getRidesController(req: Request, res: Response) {
     driver_id: z.coerce.number().optional(),
   })
 
-  const { customer_id } = getRidesParamsSchema.parse(req.body)
+  const { customer_id } = getRidesParamsSchema.parse(req.params)
 
   const { driver_id } = getRidesQuerySchema.parse(req.query)
 

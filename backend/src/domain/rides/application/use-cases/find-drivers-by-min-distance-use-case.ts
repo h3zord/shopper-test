@@ -41,7 +41,12 @@ export class FindDriverByMinDistanceUseCase {
           rating: driver.rating.toNumber(),
           comment: driver.comment,
         },
-        value: driver.pricePerKilometer.toNumber() * (distanceInMeters / 1000),
+        value: Number(
+          (
+            driver.pricePerKilometer.toNumber() *
+            (distanceInMeters / 1000)
+          ).toFixed(2),
+        ),
       }
     })
 

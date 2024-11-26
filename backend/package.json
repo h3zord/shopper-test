@@ -7,11 +7,14 @@
   "license": "ISC",
   "description": "",
   "scripts": {
-    "dev": "tsx watch src/server.ts",
+    "dev": "tsx watch src/infra/server.ts",
     "build": "tsup src --out-dir build",
-    "start": "node build/server.js",
+    "start": "node build/infra/server.js",
     "test": "vitest run --dir src/domain/rides/application/use-cases",
     "test:watch": "vitest --dir src/use-cases"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",

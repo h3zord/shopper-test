@@ -23,7 +23,7 @@ export async function rideEstimateController(req: Request, res: Response) {
       destinationAddress: destination,
     })
 
-    return res.status(200).json({ rideEstimate })
+    return res.status(200).json(rideEstimate)
   } catch (error) {
     handleControllerErrors(error, res)
   }
