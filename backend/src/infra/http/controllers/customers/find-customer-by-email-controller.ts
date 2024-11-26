@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import { z } from 'zod'
 import { makeFindCustomerByEmailUseCase } from '../../../../domain/rides/application/use-cases/factories/make-find-customer-by-email-use-case'
-import { handleControllerErrors } from '../errors/handle-controller-errors'
+import { handleControllerErrors } from '../../errors/handle-controller-errors'
 
 export async function findCustomerByEmailController(
   req: Request,

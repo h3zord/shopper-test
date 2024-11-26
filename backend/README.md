@@ -35,8 +35,8 @@
 ### Responsável por receber a origem e o destino da viagem e realizar os cálculos dos valores da viagem.
 
 ### Esse endpoint deve fazer as seguintes validações
-- [] Os endereços de origem e destino recebidos não podem estar em branco.
-- [] O id do usuário não pode estar em branco.
+- [x] Os endereços de origem e destino recebidos não podem estar em branco.
+- [x] O id do usuário não pode estar em branco.
 - [x] Os endereços de origem e destino não podem ser o mesmo endereço.
 
 ### Após as validações, ele deve:
@@ -59,8 +59,8 @@
 ### Responsável por confirmar a viagem e gravá-la no histórico.
 
 ### Esse endpoint deve fazer as seguintes validações:
-- [] Os endereços de origem e destino recebidos não podem estar em branco.
-- [] O id do usuário não pode estar em branco.
+- [x] Os endereços de origem e destino recebidos não podem estar em branco.
+- [x] O id do usuário não pode estar em branco.
 - [x] Os endereços de origem e destino não podem ser o mesmo endereço.
 - [x] Uma opção de motorista foi informada e é uma opção válida.
 - [x] A quilometragem informada realmente é válida para o motorista selecionado.
@@ -72,14 +72,14 @@
 - [x] Recalcular a rota usando a API do Google Maps.
 
 ### Ela irá retornar:
-- [] Resposta de OK ou ERRO dependendo do valor informado.
+- [x] Resposta de OK ou ERRO dependendo do valor informado.
 
 ## GET /ride/{customer_id}?driver_id={id do motorista}
 
 ### Responsável por listar as viagens realizadas por um determinado usuário.
 
 ### Esse endpoint deve fazer as seguintes validações:
-- [] O id do usuário não pode estar em branco.
+- [x] O id do usuário não pode estar em branco.
 - [x] Se um id de motorista for informado, ele precisa ser um id válido.
 
 ### Após as validações ele:
@@ -87,4 +87,4 @@
 - [x] Pode receber um query parameter “driver_id” que, se informado, deve filtrar apenas as viagens realizadas pelo usuário com este motorista.
 
 ### Ela irá retornar:
-- [] Uma lista com as viagens realizadas.
+- [x] Uma lista com as viagens realizadas.

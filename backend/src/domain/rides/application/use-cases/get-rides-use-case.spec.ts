@@ -3,12 +3,12 @@ import { InMemoryCustomersRepository } from '../../../../tests/repositories/in-m
 import { InMemoryDriversRepository } from '../../../../tests/repositories/in-memory-drivers-repository'
 import { CustomerNotFound } from './errors/customer-not-found'
 import { InMemoryRidesRepository } from '../../../../tests/repositories/in-memory-rides-repository'
-import { DriverNotFound } from './errors/driver-not-found'
 import { GetRidesUseCase } from './get-rides-use-case'
 import { GetAddressService } from '../services/get-address-service'
 import { createCustomerInMemory } from '../../../../tests/factories/create-customer-in-memory'
 import { createDriverInMemory } from '../../../../tests/factories/create-driver-in-memory'
 import { createRideInMemory } from '../../../../tests/factories/create-ride-in-memory'
+import { InvalidDriver } from './errors/invalid-driver'
 
 describe('Get rides unit test', () => {
   let customersRepository: InMemoryCustomersRepository
@@ -85,7 +85,7 @@ describe('Get rides unit test', () => {
         customerId,
         driverId: 3,
       }),
-    ).rejects.toBeInstanceOf(DriverNotFound)
+    ).rejects.toBeInstanceOf(InvalidDriver)
   })
 
   it('it should be able to return a list with ride details', async () => {

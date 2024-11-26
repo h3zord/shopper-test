@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import { z } from 'zod'
 import { makeRegisterCustomerUseCase } from '../../../../domain/rides/application/use-cases/factories/make-register-customer-use-case'
-import { handleControllerErrors } from '../errors/handle-controller-errors'
+import { handleControllerErrors } from '../../errors/handle-controller-errors'
 
 export async function registerCustomerController(req: Request, res: Response) {
   const registerCustomerBodySchema = z.object({

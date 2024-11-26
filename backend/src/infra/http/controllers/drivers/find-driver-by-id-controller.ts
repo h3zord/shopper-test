@@ -1,20 +1,20 @@
 import { Request, Response } from 'express'
 import { z } from 'zod'
 import { makeFindDriverByIdUseCase } from '../../../../domain/rides/application/use-cases/factories/make-find-driver-by-id-use-case'
-import { handleControllerErrors } from '../errors/handle-controller-errors'
+import { handleControllerErrors } from '../../errors/handle-controller-errors'
 
 export async function findDriverByIdController(req: Request, res: Response) {
   const findDriverByIdParamsSchema = z.object({
-    id: z.number(),
+    driver_id: z.coerce.number(),
   })
 
-  const { id } = findDriverByIdParamsSchema.parse(req.params)
+  const { driver_id } = findDriverByIdParamsSchema.parse(req.params)
 
   const findDriverByIdUseCase = makeFindDriverByIdUseCase()
 
   try {
     const { driver } = await findDriverByIdUseCase.execute({
-      id,
+      id: driver_id,
     })
 
     return res.status(200).json({ driver })

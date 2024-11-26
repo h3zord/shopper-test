@@ -6,5 +6,5 @@ import { findCustomerByIdController } from './find-customer-by-id-controller'
 export const customerRouters = express.Router()
 
 customerRouters.post('/login-customer', findCustomerByEmailController)
-customerRouters.get('/find-customer/:id', findCustomerByIdController)
+customerRouters.get('/find-customer/:customer_id', findCustomerByIdController)
 customerRouters.post('/register-customer', registerCustomerController)

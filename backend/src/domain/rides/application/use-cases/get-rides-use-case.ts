@@ -2,11 +2,12 @@ import { CustomersRepository } from '../repositories/contracts/customers-reposit
 import { DriversRepository } from '../repositories/contracts/drivers-repository'
 import { GetAddressService } from '../services/get-address-service'
 import { CustomerNotFound } from './errors/customer-not-found'
-import { DriverNotFound } from './errors/driver-not-found'
 import {
   GetRidesResponse,
   RidesRepository,
 } from '../repositories/contracts/rides-repository'
+import { NoRidesFound } from './errors/no-rides-found'
+import { InvalidDriver } from './errors/invalid-driver'
 
 interface GetRideUseCaseResponse {
   customerId: string
@@ -66,7 +67,7 @@ export class GetRidesUseCase {
       const driver = await this.driversRepository.findDriverById(driverId)
 
       if (!driver) {
-        throw new DriverNotFound()
+        throw new InvalidDriver()
       }
     }
 
@@ -74,6 +75,10 @@ export class GetRidesUseCase {
       customerId,
       driverId,
     })
+
+    if (!rideList.length) {
+      throw new NoRidesFound()
+    }
 
     const rideListMapped = await this.mapRidesWithAddressDetails(rideList)
 
