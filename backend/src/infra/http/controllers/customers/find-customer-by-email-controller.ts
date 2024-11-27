@@ -20,6 +20,11 @@ export async function findCustomerByEmailController(
       email,
     })
 
+    res.cookie('customerId', customer.id, {
+      sameSite: 'strict',
+      secure: true,
+    })
+
     return res.status(200).json({ customer })
   } catch (error) {
     handleControllerErrors(error, res)

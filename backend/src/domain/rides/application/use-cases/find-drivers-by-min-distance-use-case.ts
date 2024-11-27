@@ -31,7 +31,7 @@ export class FindDriverByMinDistanceUseCase {
     driverList,
     distanceInMeters,
   }: DriverListMapProps) {
-    const driverListMapped = driverList.map((driver) => {
+    const driverListMapped = driverList?.map((driver) => {
       return {
         id: driver.id,
         name: driver.name,

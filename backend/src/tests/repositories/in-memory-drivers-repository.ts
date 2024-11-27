@@ -25,4 +25,8 @@ export class InMemoryDriversRepository implements DriversRepository {
 
     return sortedDriverListByPrice
   }
+
+  async getAllDrivers() {
+    return this.items
+  }
 }

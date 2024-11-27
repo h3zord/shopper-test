@@ -27,4 +27,10 @@ export class PrismaDriversRepository implements DriversRepository {
 
     return driverList
   }
+
+  async getAllDrivers() {
+    const driverList = await prisma.driver.findMany()
+
+    return driverList
+  }
 }

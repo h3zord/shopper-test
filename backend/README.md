@@ -88,3 +88,12 @@
 
 ### Ela irá retornar:
 - [x] Uma lista com as viagens realizadas.
+
+
+
+TO DO
+
+- nomes em lowercase no banco dados
+- get all drivers
+- adicionar distancia minima em ride estimate
+- adicionar erro se nenhum motorista for encontrado (find-drivers-by-min-distance-use-case) ??
