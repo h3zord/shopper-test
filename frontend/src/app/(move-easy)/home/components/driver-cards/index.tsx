@@ -12,6 +12,8 @@ import { ErrorContainer } from '@/app/components/styles'
 import { api } from '@/lib/axios'
 import { useState } from 'react'
 import { AxiosError } from 'axios'
+import { useRouter } from 'next/navigation'
+import { formatValue } from '@/utils/format-value'
 
 interface DriverCardsProps {
   driverList: {
@@ -47,6 +49,8 @@ export function DriverCards({
 }: DriverCardsProps) {
   const [axiosErrorMessage, setAxiosErrorMessage] = useState(null)
 
+  const router = useRouter()
+
   const hasDriverOptions = driverList?.length > 0
 
   async function handleConfirmRideButton({
@@ -73,6 +77,8 @@ export function DriverCards({
       setAxiosErrorMessage(null)
 
       console.log(response.data)
+
+      router.push('/history')
     } catch (error) {
       if (error instanceof AxiosError) {
         setAxiosErrorMessage(error.response?.data.error_description)
@@ -114,13 +120,7 @@ export function DriverCards({
               </p>
             </DriverReviewContainer>
 
-            <PriceContent>
-              Preço:{' '}
-              {(78.66).toLocaleString('pt-BR', {
-                style: 'currency',
-                currency: 'BRL',
-              })}
-            </PriceContent>
+            <PriceContent>Preço: {formatValue(78.66)}</PriceContent>
 
             <ConfirmRideButton
               onClick={() =>

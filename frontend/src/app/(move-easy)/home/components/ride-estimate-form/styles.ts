@@ -8,7 +8,6 @@ export const RideEstimateFormContainer = styled.form`
   justify-content: center;
   align-items: end;
   gap: 1rem;
-  margin: auto;
 `
 
 export const RideEstimateFormContent = styled.div`

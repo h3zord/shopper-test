@@ -27,3 +27,5 @@ export const DefaultButton = styled.button`
     opacity: 0.3;
   }
 `
+
+export const DefaultInput = styled.input``

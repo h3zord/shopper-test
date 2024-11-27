@@ -9,6 +9,10 @@ export const HeaderContainer = styled.header`
   justify-content: space-between;
   padding: 0.5rem 1rem;
   height: 6.5rem;
+
+  & > a {
+    text-decoration: none;
+  }
 `
 export const LogoContainer = styled.div`
   display: flex;

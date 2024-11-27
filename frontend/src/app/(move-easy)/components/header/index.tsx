@@ -13,6 +13,7 @@ import {
   UserInfo,
   UserPanel,
 } from './styles'
+import Link from 'next/link'
 
 export default function Header() {
   const [userName, setUserName] = useState('')
@@ -53,17 +54,19 @@ export default function Header() {
 
   return (
     <HeaderContainer>
-      <LogoContainer>
-        <Image
-          src="/logo.svg"
-          width={85}
-          height={85}
-          alt="Application logo (car)"
-          priority
-        />
+      <Link href="/home">
+        <LogoContainer>
+          <Image
+            src="/logo.svg"
+            width={85}
+            height={85}
+            alt="Application logo (car)"
+            priority
+          />
 
-        <h3>MoveEasy</h3>
-      </LogoContainer>
+          <h3>MoveEasy</h3>
+        </LogoContainer>
+      </Link>
 
       <UserPanel>
         <UserInfo>

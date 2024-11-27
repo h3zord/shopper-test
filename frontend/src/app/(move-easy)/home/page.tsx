@@ -6,35 +6,42 @@ import { HomeContainer } from './styles'
 import { DriverCards } from './components/driver-cards'
 import RideMetrics from './components/ride-metrics'
 
+export interface Coordinates {
+  latitude: number
+  longitude: number
+}
+
+interface Review {
+  rating: number
+  comment: string
+}
+
+interface Option {
+  id: number
+  name: string
+  description: string
+  picture: string
+  vehicle: string
+  review: Review
+  value: number
+}
+
+interface Route {
+  distanceMeters: number
+  duration: string
+}
+
+interface RouteResponse {
+  routes: Route[]
+}
+
 export interface RideInformations {
-  origin: {
-    latitude: number
-    longitude: number
-  }
-  destination: {
-    latitude: number
-    longitude: number
-  }
+  origin: Coordinates
+  destination: Coordinates
   distance: number
   duration: string
-  options: {
-    id: number
-    name: string
-    description: string
-    picture: string
-    vehicle: string
-    review: {
-      rating: number
-      comment: string
-    }
-    value: number
-  }[]
-  routeResponse: {
-    routes: {
-      distanceMeters: number
-      duration: string
-    }[]
-  }
+  options: Option[]
+  routeResponse: RouteResponse
 }
 
 export default function Home() {
