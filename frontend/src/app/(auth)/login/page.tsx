@@ -11,8 +11,8 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import {
   AuthContainer,
   AuthForm,
-  AuthInContent,
-  ConfirmButton,
+  AuthContent,
+  AuthenticateButton,
   SwitchRouteButton,
 } from '../components/styles'
 
@@ -70,7 +70,7 @@ export default function Login() {
         Cadastrar
       </SwitchRouteButton>
 
-      <AuthInContent>
+      <AuthContent>
         <h2>Acesse sua conta</h2>
 
         <p>Conecte-se e encontre o motorista perfeito para o seu trajeto.</p>
@@ -79,13 +79,15 @@ export default function Login() {
           <label htmlFor="email-input">Seu e-mail</label>
           <input id="email-input" {...register('email')} />
 
-          <ConfirmButton disabled={isSubmitting}>Acessar conta</ConfirmButton>
+          <AuthenticateButton disabled={isSubmitting}>
+            Acessar conta
+          </AuthenticateButton>
 
           <ErrorContainer>
             {errors.email?.message || axiosErrorMessage}
           </ErrorContainer>
         </AuthForm>
-      </AuthInContent>
+      </AuthContent>
     </AuthContainer>
   )
 }

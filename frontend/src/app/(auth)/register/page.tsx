@@ -11,8 +11,8 @@ import { useRouter } from 'next/navigation'
 import {
   AuthContainer,
   AuthForm,
-  AuthInContent,
-  ConfirmButton,
+  AuthContent,
+  AuthenticateButton,
   SwitchRouteButton,
 } from '../components/styles'
 
@@ -69,7 +69,7 @@ export default function Login() {
         Fazer Login
       </SwitchRouteButton>
 
-      <AuthInContent>
+      <AuthContent>
         <h2>Crie sua conta</h2>
 
         <p>Crie sua conta e comece a viajar de forma rápida e divertida.</p>
@@ -81,15 +81,15 @@ export default function Login() {
           <label htmlFor="email-input">Seu e-mail</label>
           <input id="email-input" {...register('email')} />
 
-          <ConfirmButton disabled={isSubmitting}>
+          <AuthenticateButton disabled={isSubmitting}>
             Finalizar cadastro
-          </ConfirmButton>
+          </AuthenticateButton>
 
           <ErrorContainer>
             {errors.name?.message || errors.email?.message || axiosErrorMessage}
           </ErrorContainer>
         </AuthForm>
-      </AuthInContent>
+      </AuthContent>
     </AuthContainer>
   )
 }

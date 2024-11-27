@@ -1,5 +1,6 @@
 'use client'
 
+import { DefaultButton } from '@/app/components/styles'
 import styled from 'styled-components'
 
 export const AuthContainer = styled.section`
@@ -8,7 +9,7 @@ export const AuthContainer = styled.section`
   display: flex;
 `
 
-export const AuthInContent = styled.div`
+export const AuthContent = styled.div`
   margin: auto;
   display: flex;
   flex-direction: column;
@@ -70,22 +71,6 @@ export const AuthForm = styled.form`
   }
 `
 
-export const ConfirmButton = styled.button`
-  all: unset;
-  color: ${(props) => props.theme.colors['neutral-100']};
-  cursor: pointer;
-  padding: 0.75rem 1.5rem;
-  border-radius: 0.25rem;
-  transition: 0.2s;
+export const AuthenticateButton = styled(DefaultButton)`
   margin-top: 0.5rem;
-  background-color: ${(props) => props.theme.colors['yellow-600']};
-
-  &:hover:not([disabled]) {
-    opacity: 0.7;
-  }
-
-  &:disabled {
-    cursor: not-allowed;
-    opacity: 0.3;
-  }
 `

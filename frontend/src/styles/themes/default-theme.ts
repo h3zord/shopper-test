@@ -3,9 +3,11 @@ export const defaultTheme = {
     'neutral-100': '#f5f5f5',
     'neutral-300': '#d4d4d4',
     'neutral-400': '#a3a3a3',
+    'neutral-500': '#737373',
     'neutral-800': '#262626',
     'neutral-950': '#0a0a0a',
 
+    'yellow-400': '#facc15',
     'yellow-600': '#ca8a04',
 
     'red-500': '#ef4444',
@@ -13,6 +15,7 @@ export const defaultTheme = {
 
   fonts: {
     'text-base': '16px',
+    'text-sm': '14px',
     'text-2xl': '24px',
   },
 }
