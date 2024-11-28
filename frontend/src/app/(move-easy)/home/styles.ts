@@ -6,4 +6,5 @@ export const HomeContainer = styled.main`
   min-height: calc(100vh - 6.5rem);
   background-color: ${(props) => props.theme.colors['neutral-800']};
   padding: 1rem;
+  overflow-x: hidden;
 `

@@ -4,8 +4,9 @@ import React, { useState } from 'react'
 import { RideEstimateForm } from './components/ride-estimate-form'
 import { HomeContainer } from './styles'
 import { DriverCards } from './components/driver-cards'
-import { Map } from './components/map'
 import { RideMetrics } from './components/ride-metrics'
+import { DirectionsMap } from './components/directions-map'
+import { UserLocationMap } from './components/user-location-map'
 
 export interface Coordinates {
   latitude: number
@@ -63,7 +64,7 @@ export default function Home() {
         setDestinationAddress={setDestinationAddress}
       />
 
-      {hasRideInformations && (
+      {hasRideInformations ? (
         <>
           <RideMetrics
             distance={rideInformations.distance}
@@ -79,7 +80,7 @@ export default function Home() {
             }}
           />
 
-          <Map
+          <DirectionsMap
             origin={{
               lat: rideInformations.origin.latitude,
               lng: rideInformations.origin.longitude,
@@ -90,6 +91,8 @@ export default function Home() {
             }}
           />
         </>
+      ) : (
+        <UserLocationMap />
       )}
     </HomeContainer>
   )

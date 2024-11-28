@@ -28,4 +28,15 @@ export const DefaultButton = styled.button`
   }
 `
 
-export const DefaultInput = styled.input``
+export const DefaultInput = styled.input`
+  border-radius: 0.5rem;
+  border: 0.5px solid ${(props) => props.theme.colors['neutral-400']};
+  padding: 0.5rem;
+  color: ${(props) => props.theme.colors['neutral-100']};
+  background-color: transparent;
+
+  &:focus {
+    outline: 2px solid ${(props) => props.theme.colors['yellow-600']};
+    border: 0.5px solid ${(props) => props.theme.colors['yellow-600']};
+  }
+`

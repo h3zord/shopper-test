@@ -1,6 +1,6 @@
 'use client'
 
-import { DefaultButton } from '@/app/components/styles'
+import { DefaultButton, DefaultInput } from '@/app/components/styles'
 import styled from 'styled-components'
 
 export const SearchHistoryFormContainer = styled.form`
@@ -18,19 +18,13 @@ export const SearchHistoryFormContent = styled.div`
   color: ${(props) => props.theme.colors['neutral-950']};
   margin-top: 1rem;
 
-  & > input {
-    border-radius: 0.5rem;
-    border: 0.5px solid ${(props) => props.theme.colors['neutral-400']};
-    padding: 0.5rem;
-    color: ${(props) => props.theme.colors['neutral-100']};
-    background-color: transparent;
-    width: 15rem;
-
-    &:focus {
-      outline: 2px solid ${(props) => props.theme.colors['yellow-600']};
-      border: 0.5px solid ${(props) => props.theme.colors['yellow-600']};
-    }
+  & > h3 {
+    color: ${(props) => props.theme.colors['yellow-600']};
   }
+`
+
+export const RideHistoryInput = styled(DefaultInput)`
+  width: 15rem;
 `
 
 export const StyledSelect = styled.select`

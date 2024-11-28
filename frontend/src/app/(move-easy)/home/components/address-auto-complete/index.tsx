@@ -7,16 +7,18 @@ interface AutoCompleteInputProps {
   saveAddress: Dispatch<SetStateAction<string>>
 }
 
-export const AutoCompleteInput: React.FC<AutoCompleteInputProps> = ({
+export function AutoCompleteInput({
   input,
   saveAddress,
-}) => {
+}: AutoCompleteInputProps) {
   const { isLoaded } = useGoogleMaps()
+
   const inputRef = useRef<google.maps.places.SearchBox | null>(null)
 
   const handleOnPlacesChanged = () => {
     if (inputRef.current) {
       const places = inputRef.current.getPlaces()
+
       if (places && places[0]?.formatted_address) {
         saveAddress(places[0].formatted_address)
       }

@@ -3,7 +3,13 @@
 import Cookies from 'js-cookie'
 
 import { api } from '@/lib/axios'
-import { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react'
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -11,6 +17,7 @@ import { AxiosError } from 'axios'
 import { ErrorContainer } from '@/app/components/styles'
 import { RideList } from '../page'
 import {
+  RideHistoryInput,
   SearchHistoryFormContainer,
   SearchHistoryFormContent,
   SearchRidesButton,
@@ -61,25 +68,46 @@ export function SearchHistoryForm({
     },
   })
 
-  useEffect(() => {
-    async function getDrivers() {
-      try {
-        const response = await api.get('/get-drivers')
+  async function getDrivers() {
+    try {
+      const response = await api.get('/get-drivers')
 
-        setDriverList(response.data.driverList)
+      setDriverList(response.data.driverList)
 
-        setAxiosErrorMessage(null)
-      } catch (error) {
-        if (error instanceof AxiosError) {
-          setAxiosErrorMessage(error.response?.data.error_description)
-        }
-
-        console.error(error)
+      setAxiosErrorMessage(null)
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        setAxiosErrorMessage(error.response?.data.error_description)
       }
-    }
 
+      console.error(error)
+    }
+  }
+
+  const getRides = useCallback(async () => {
+    try {
+      const response = await api.get(`/ride/${id}`)
+
+      setAxiosErrorMessage(null)
+      setRideList(response.data)
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        setAxiosErrorMessage(error.response?.data.error_description)
+      }
+
+      setRideList({
+        customer_id: id || customerId,
+        rides: [],
+      })
+
+      console.error(error)
+    }
+  }, [id, customerId, setRideList])
+
+  useEffect(() => {
     getDrivers()
-  }, [])
+    getRides()
+  }, [getRides])
 
   async function submitSearchHistoryForm(data: SearchHistoryFormSchema) {
     try {
@@ -115,7 +143,7 @@ export function SearchHistoryForm({
         <SearchHistoryFormContent>
           <h3>Sua identificação</h3>
 
-          <input {...register('customerId')} />
+          <RideHistoryInput {...register('customerId')} />
         </SearchHistoryFormContent>
 
         <SearchHistoryFormContent>

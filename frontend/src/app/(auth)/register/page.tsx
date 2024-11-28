@@ -14,6 +14,7 @@ import {
   AuthContent,
   AuthenticateButton,
   SwitchRouteButton,
+  AuthenticateInput,
 } from '../components/styles'
 
 export default function Login() {
@@ -76,10 +77,10 @@ export default function Login() {
 
         <AuthForm>
           <label htmlFor="name-input">Seu nome</label>
-          <input id="name-input" {...register('name')} />
+          <AuthenticateInput id="name-input" {...register('name')} />
 
           <label htmlFor="email-input">Seu e-mail</label>
-          <input id="email-input" {...register('email')} />
+          <AuthenticateInput id="email-input" {...register('email')} />
 
           <AuthenticateButton disabled={isSubmitting}>
             Finalizar cadastro

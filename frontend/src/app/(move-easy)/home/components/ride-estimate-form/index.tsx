@@ -6,6 +6,7 @@ import {
   CalculateRideButton,
   RideEstimateFormContainer,
   RideEstimateFormContent,
+  RideEstimateInput,
 } from './styles'
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
@@ -80,14 +81,19 @@ export function RideEstimateForm({
         <RideEstimateFormContent>
           <h3>Sua identificação</h3>
 
-          <input {...register('customerId')} />
+          <RideEstimateInput {...register('customerId')} />
         </RideEstimateFormContent>
 
         <RideEstimateFormContent>
           <h3>Onde você está?</h3>
 
           <AutoCompleteInput
-            input={<input {...register('originAddress')} />}
+            input={
+              <RideEstimateInput
+                {...register('originAddress')}
+                placeholder=""
+              />
+            }
             saveAddress={setOriginAddress}
           />
         </RideEstimateFormContent>
@@ -95,7 +101,12 @@ export function RideEstimateForm({
           <h3>Para onde você vai?</h3>
 
           <AutoCompleteInput
-            input={<input {...register('destinationAddress')} />}
+            input={
+              <RideEstimateInput
+                {...register('destinationAddress')}
+                placeholder=""
+              />
+            }
             saveAddress={setDestinationAddress}
           />
         </RideEstimateFormContent>

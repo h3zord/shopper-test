@@ -7,7 +7,7 @@ interface MapProps {
   destination: { lat: number; lng: number }
 }
 
-export const Map: React.FC<MapProps> = ({ origin, destination }) => {
+export function DirectionsMap({ origin, destination }: MapProps) {
   const { isLoaded } = useGoogleMaps()
 
   const [directions, setDirections] =
@@ -38,7 +38,7 @@ export const Map: React.FC<MapProps> = ({ origin, destination }) => {
 
   return (
     <GoogleMap
-      mapContainerStyle={{ width: '100%', height: '450px' }}
+      mapContainerStyle={{ width: '100%', height: '65vh' }}
       center={origin}
       zoom={10}
       onLoad={fetchDirections}

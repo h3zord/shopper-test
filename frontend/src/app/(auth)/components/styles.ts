@@ -1,6 +1,6 @@
 'use client'
 
-import { DefaultButton } from '@/app/components/styles'
+import { DefaultButton, DefaultInput } from '@/app/components/styles'
 import styled from 'styled-components'
 
 export const AuthContainer = styled.section`
@@ -70,6 +70,8 @@ export const AuthForm = styled.form`
     }
   }
 `
+
+export const AuthenticateInput = styled(DefaultInput)``
 
 export const AuthenticateButton = styled(DefaultButton)`
   margin-top: 0.5rem;

@@ -31,8 +31,6 @@ export default function History() {
 
   return (
     <HistoryContainer>
-      <h2>Histórico de viagens</h2>
-
       <SearchHistoryForm
         setRideList={setRideList}
         customerId={rideList.customer_id}
