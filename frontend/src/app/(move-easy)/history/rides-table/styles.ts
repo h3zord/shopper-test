@@ -26,7 +26,7 @@ export const TableBody = styled.tbody``
 export const TableRow = styled.tr``
 
 export const TableCell = styled.td`
-  padding: 12px;
+  padding: 8px;
   border: 1px solid ${(props) => props.theme.colors['neutral-400']};
   text-align: left;
   color: ${(props) => props.theme.colors['neutral-100']};

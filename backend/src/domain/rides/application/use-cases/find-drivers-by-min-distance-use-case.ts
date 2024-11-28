@@ -5,16 +5,18 @@ interface FindDriverByMinDistanceUseCaseRequest {
   distanceInMeters: number
 }
 
+interface Review {
+  rating: number
+  comment: string
+}
+
 interface FindDriverByMinDistanceUseCaseResponse {
   driverList: {
     id: number
     name: string
     description: string
     vehicle: string
-    review: {
-      rating: number
-      comment: string
-    }
+    review: Review
     value: number
   }[]
 }

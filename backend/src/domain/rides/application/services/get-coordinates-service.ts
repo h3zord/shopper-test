@@ -3,13 +3,12 @@ import axios from 'axios'
 import { GetCoordinatesError } from './errors/get-coordinates-error'
 import { GetCoordinates } from './contracts/get-coordinates'
 import { InvalidData } from '../use-cases/errors/invalid-data'
+import { env } from '../../../../infra/env'
 
 interface Coordinates {
   latitude: number
   longitude: number
 }
-
-interface convertAddressToCoordinatesResponse extends Coordinates {}
 
 interface GetCoordinatesServiceProps {
   originAddress: string
@@ -22,10 +21,8 @@ interface GetCoordinatesServiceResponse {
 }
 
 export class GetCoordinatesService implements GetCoordinates {
-  private async convertAddressToCoordinates(
-    address: string,
-  ): Promise<convertAddressToCoordinatesResponse> {
-    const googleMapsApiKey = 'AIzaSyBb43btE7llvofiBSvGJV9A6IzJYk70BtY'
+  private async convertAddressToCoordinates(address: string) {
+    const googleMapsApiKey = env.GOOGLE_API_KEY
 
     const baseUrl = 'https://maps.googleapis.com/maps/api/geocode/json'
 
@@ -42,10 +39,12 @@ export class GetCoordinatesService implements GetCoordinates {
           longitude: location.lng,
         }
       } else {
-        throw new Error(`Geocoding error: ${response.data.status}`)
+        throw new GetCoordinatesError()
       }
     } catch (error) {
-      throw new GetCoordinatesError(error)
+      console.error(error)
+
+      throw new GetCoordinatesError()
     }
   }
 
@@ -72,17 +71,9 @@ export class GetCoordinatesService implements GetCoordinates {
         destinationCoordinates,
       }
     } catch (error) {
-      throw new GetCoordinatesError(error)
+      console.error(error)
+
+      throw new GetCoordinatesError()
     }
   }
 }
-
-// const originAddress = 'Rua das Flores, 123, São Paulo, Brasil'
-// const destinationAddress = 'Avenida Paulista, 1000, São Paulo, Brasil'
-
-// getCoordinatesService({ originAddress, destinationAddress })
-//   .then((coordinates) => {
-//     console.log('Coordenadas de origem:', coordinates!.originCoordinates)
-//     console.log('Coordenadas de destino:', coordinates!.destinationCoordinates)
-//   })
-//   .catch((error) => console.error(error))

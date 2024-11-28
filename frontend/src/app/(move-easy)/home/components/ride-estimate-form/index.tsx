@@ -1,6 +1,7 @@
 'use client'
 
 import Cookies from 'js-cookie'
+
 import {
   CalculateRideButton,
   RideEstimateFormContainer,
@@ -14,23 +15,28 @@ import { Dispatch, SetStateAction, useState } from 'react'
 import { AxiosError } from 'axios'
 import { ErrorContainer } from '@/app/components/styles'
 import { RideInformations } from '../../page'
+import { AutoCompleteInput } from '../address-auto-complete'
 
 interface RideEstimateFormProps {
   setRideInformations: Dispatch<SetStateAction<RideInformations>>
+  setOriginAddress: Dispatch<SetStateAction<string>>
+  setDestinationAddress: Dispatch<SetStateAction<string>>
 }
 
 export function RideEstimateForm({
   setRideInformations,
+  setOriginAddress,
+  setDestinationAddress,
 }: RideEstimateFormProps) {
   const [axiosErrorMessage, setAxiosErrorMessage] = useState(null)
 
   const rideEstimateFormSchema = z.object({
     customerId: z.string().uuid({ message: 'Informe um ID válido' }),
-    originAddress: z.string({
+    originAddress: z.string().min(3, {
       message: 'Informe um endereço de origem válido',
     }),
-    destinationAddress: z.string({
-      message: 'Informe um endereço de destino válido',
+    destinationAddress: z.string().min(3, {
+      message: 'Informe um endereço de origem válido',
     }),
   })
 
@@ -46,8 +52,6 @@ export function RideEstimateForm({
     resolver: zodResolver(rideEstimateFormSchema),
     defaultValues: {
       customerId: id,
-      originAddress: 'Rua das Flores, 123, São Paulo, Brasil',
-      destinationAddress: 'Avenida Paulista, 1000, São Paulo, Brasil',
     },
   })
 
@@ -58,15 +62,12 @@ export function RideEstimateForm({
         origin: data.originAddress,
         destination: data.destinationAddress,
       })
-
       setAxiosErrorMessage(null)
-
       setRideInformations(response.data)
     } catch (error) {
       if (error instanceof AxiosError) {
         setAxiosErrorMessage(error.response?.data.error_description)
       }
-
       console.error(error)
     }
   }
@@ -85,12 +86,18 @@ export function RideEstimateForm({
         <RideEstimateFormContent>
           <h3>Onde você está?</h3>
 
-          <input {...register('originAddress')} />
+          <AutoCompleteInput
+            input={<input {...register('originAddress')} />}
+            saveAddress={setOriginAddress}
+          />
         </RideEstimateFormContent>
         <RideEstimateFormContent>
           <h3>Para onde você vai?</h3>
 
-          <input {...register('destinationAddress')} />
+          <AutoCompleteInput
+            input={<input {...register('destinationAddress')} />}
+            saveAddress={setDestinationAddress}
+          />
         </RideEstimateFormContent>
 
         <CalculateRideButton disabled={isSubmitting}>
@@ -107,6 +114,3 @@ export function RideEstimateForm({
     </>
   )
 }
-
-// const originAddress = 'Rua das Flores, 123, São Paulo, Brasil'
-// const destinationAddress = 'Avenida Paulista, 1000, São Paulo, Brasil'

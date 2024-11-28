@@ -17,8 +17,6 @@ interface RideConfirmUseCaseRequest {
   value: number
 }
 
-interface RideConfirmUseCaseResponse {}
-
 export class RideConfirmUseCase {
   constructor(
     private getCoordinatesService: GetCoordinates,
@@ -35,7 +33,7 @@ export class RideConfirmUseCase {
     distanceInMeters,
     durationInSeconds,
     value,
-  }: RideConfirmUseCaseRequest): Promise<RideConfirmUseCaseResponse> {
+  }: RideConfirmUseCaseRequest) {
     if (originAddress === destinationAddress) {
       throw new InvalidData()
     }
@@ -73,7 +71,5 @@ export class RideConfirmUseCase {
       durationInSeconds,
       value,
     })
-
-    return {}
   }
 }

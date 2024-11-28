@@ -17,7 +17,7 @@ CREATE TABLE "drivers" (
     "rating" DECIMAL(65,30) NOT NULL,
     "comment" TEXT NOT NULL,
     "price_per_kilometer" DECIMAL(65,30) NOT NULL,
-    "minimum_kilometers" INTEGER NOT NULL,
+    "minimum_meters" INTEGER NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "drivers_pkey" PRIMARY KEY ("id")

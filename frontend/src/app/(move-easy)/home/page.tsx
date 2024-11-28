@@ -4,7 +4,8 @@ import React, { useState } from 'react'
 import { RideEstimateForm } from './components/ride-estimate-form'
 import { HomeContainer } from './styles'
 import { DriverCards } from './components/driver-cards'
-import RideMetrics from './components/ride-metrics'
+import { Map } from './components/map'
+import { RideMetrics } from './components/ride-metrics'
 
 export interface Coordinates {
   latitude: number
@@ -52,29 +53,40 @@ export default function Home() {
     {} as RideInformations,
   )
 
-  console.log(rideInformations)
-
   const hasRideInformations = Object.keys(rideInformations).length > 0
 
   return (
     <HomeContainer>
-      <RideEstimateForm setRideInformations={setRideInformations} />
+      <RideEstimateForm
+        setRideInformations={setRideInformations}
+        setOriginAddress={setOriginAddress}
+        setDestinationAddress={setDestinationAddress}
+      />
 
-      {!hasRideInformations && (
+      {hasRideInformations && (
         <>
           <RideMetrics
-            distance={rideInformations.distance || 5151}
-            duration={rideInformations.duration || '8145s'}
+            distance={rideInformations.distance}
+            duration={rideInformations.duration}
           />
           <DriverCards
             driverList={rideInformations.options}
             rideInformations={{
-              origin: originAddress || 'Rua das Flores, 123, São Paulo, Brasil',
-              destination:
-                destinationAddress ||
-                'Avenida Paulista, 1000, São Paulo, Brasil',
-              distanceInMeters: rideInformations.distance || 5151,
-              durationInSeconds: rideInformations.duration || '8145s',
+              origin: originAddress,
+              destination: destinationAddress,
+              distanceInMeters: rideInformations.distance,
+              durationInSeconds: rideInformations.duration,
+            }}
+          />
+
+          <Map
+            origin={{
+              lat: rideInformations.origin.latitude,
+              lng: rideInformations.origin.longitude,
+            }}
+            destination={{
+              lat: rideInformations.destination.latitude,
+              lng: rideInformations.destination.longitude,
             }}
           />
         </>

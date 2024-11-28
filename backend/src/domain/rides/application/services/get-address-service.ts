@@ -2,6 +2,7 @@ import axios from 'axios'
 
 import { GetAddressError } from './errors/get-address-error'
 import { GetAddress } from './contracts/get-adress'
+import { env } from '../../../../infra/env'
 
 interface Coordinates {
   latitude: number
@@ -26,7 +27,7 @@ export class GetAddressService implements GetAddress {
   private async convertCoordinatesToAddress(
     coordinates: Coordinates,
   ): Promise<convertCoordinatesToAddressResponse> {
-    const googleMapsApiKey = 'AIzaSyBb43btE7llvofiBSvGJV9A6IzJYk70BtY'
+    const googleMapsApiKey = env.GOOGLE_API_KEY
 
     const baseUrl = 'https://maps.googleapis.com/maps/api/geocode/json'
 
@@ -42,10 +43,12 @@ export class GetAddressService implements GetAddress {
           address,
         }
       } else {
-        throw new Error(`Reverse geocoding error: ${response.data.status}`)
+        throw new GetAddressError()
       }
     } catch (error) {
-      throw new GetAddressError(error)
+      console.error(error)
+
+      throw new GetAddressError()
     }
   }
 
@@ -66,22 +69,9 @@ export class GetAddressService implements GetAddress {
         destinationAddress: destinationAddress.address,
       }
     } catch (error) {
-      throw new GetAddressError(error)
+      console.error(error)
+
+      throw new GetAddressError()
     }
   }
 }
-
-// const getAddressService = new GetAddressService()
-
-// getAddressService
-//   .execute({
-//     originCoordinates: { latitude: -23.4419306, longitude: -46.8068621 },
-//     destinationCoordinates: { latitude: -23.5649224, longitude: -46.6519376 },
-//   })
-//   .then((result) => {
-//     console.log('Origin Address:', result.originAddress)
-//     console.log('Destination Address:', result.destinationAddress)
-//   })
-//   .catch((error) => {
-//     console.error('Error fetching addresses:', error.message)
-//   })

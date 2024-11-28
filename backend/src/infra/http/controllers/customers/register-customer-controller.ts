@@ -5,8 +5,8 @@ import { handleControllerErrors } from '../../errors/handle-controller-errors'
 
 export async function registerCustomerController(req: Request, res: Response) {
   const registerCustomerBodySchema = z.object({
-    name: z.string().min(3),
-    email: z.string().email(),
+    name: z.string().min(3).toLowerCase(),
+    email: z.string().email().toLowerCase(),
   })
 
   const { name, email } = registerCustomerBodySchema.parse(req.body)

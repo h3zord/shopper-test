@@ -13,6 +13,7 @@ export const DriverCardContainer = styled.section`
 
 export const DriverCard = styled.div`
   width: 350px;
+  height: 460px;
   border: 1px solid ${(props) => props.theme.colors['yellow-400']};
   padding: 0.2rem;
   border-radius: 0.75rem;

@@ -2,6 +2,7 @@ import { CustomersRepository } from '../repositories/contracts/customers-reposit
 import { GetCoordinates } from '../services/contracts/get-coordinates'
 import { GetRideDetails } from '../services/contracts/get-ride-details'
 import { CustomerNotFound } from './errors/customer-not-found'
+import { DriverNotFound } from './errors/driver-not-found'
 import { InvalidData } from './errors/invalid-data'
 import { FindDriverByMinDistanceUseCase } from './find-drivers-by-min-distance-use-case'
 
@@ -9,6 +10,43 @@ interface RideEstimateUseCaseRequest {
   customerId: string
   originAddress: string
   destinationAddress: string
+}
+
+interface Coordinates {
+  latitude: number
+  longitude: number
+}
+
+interface Review {
+  rating: number
+  comment: string
+}
+
+interface Option {
+  id: number
+  name: string
+  description: string
+  vehicle: string
+  review: Review
+  value: number
+}
+
+interface Route {
+  distanceMeters: number
+  duration: string
+}
+
+interface RouteResponse {
+  routes: Route[]
+}
+
+interface RideEstimateUseCaseResponse {
+  origin: Coordinates
+  destination: Coordinates
+  distance: number
+  duration: string
+  options: Option[]
+  routeResponse: RouteResponse
 }
 
 export class RideEstimateUseCase {
@@ -23,7 +61,7 @@ export class RideEstimateUseCase {
     customerId,
     originAddress,
     destinationAddress,
-  }: RideEstimateUseCaseRequest) {
+  }: RideEstimateUseCaseRequest): Promise<RideEstimateUseCaseResponse> {
     if (originAddress === destinationAddress) {
       throw new InvalidData()
     }
@@ -49,6 +87,10 @@ export class RideEstimateUseCase {
     const { driverList } = await this.findDriversByMinDistanceUseCase.execute({
       distanceInMeters,
     })
+
+    if (!driverList.length) {
+      throw new DriverNotFound()
+    }
 
     return {
       origin: {

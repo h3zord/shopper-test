@@ -1,12 +1,40 @@
 version: '3.8'
 
 services:
-  db:
-    image: postgres:13   # Versão do PostgreSQL
-    container_name: my_postgres_db  # Nome do container
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: my_node_app
     environment:
-      POSTGRES_USER: postgres_user   # Nome do usuário do banco
-      POSTGRES_PASSWORD: postgres_password   # Senha do usuário
-      POSTGRES_DB: my_database  # Nome do banco de dados inicial
+      DATABASE_URL: postgres://postgres_user:postgres_password@db:5432/my_database
+      GOOGLE_API_KEY: AIzaSyBb43btE7llvofiBSvGJV9A6IzJYk70BtY
+      PORT: 8080
+    depends_on:
+      - db
     ports:
-      - "5432:5432"  # Mapeando a porta 5432 do container para a porta 5432 do host
+      - "8080:8080"
+
+  db:
+    image: postgres:13  
+    container_name: my_postgres_db 
+    environment:
+      POSTGRES_USER: postgres_user   
+      POSTGRES_PASSWORD: postgres_password  
+      POSTGRES_DB: my_database  
+    ports:
+      - "5432:5432"
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: my_next_app
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:8080
+      NEXT_PUBLIC_GOOGLE_API_KEY: AIzaSyBb43btE7llvofiBSvGJV9A6IzJYk70BtY
+    depends_on:
+      - backend
+    ports:
+      - "80:80"
+

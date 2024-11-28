@@ -2,6 +2,7 @@ import axios from 'axios'
 
 import { GetRideDetailsError } from './errors/get-ride-details-error'
 import { GetRideDetails } from './contracts/get-ride-details'
+import { env } from '../../../../infra/env'
 
 interface Coordinates {
   latitude: number
@@ -33,7 +34,7 @@ export class GetRideDetailsService implements GetRideDetails {
     originCoordinates,
     destinationCoordinates,
   }: GetRideDetailsServiceProps): Promise<GetRideDetailsServiceResponse> {
-    const googleMapsApiKey = 'AIzaSyBb43btE7llvofiBSvGJV9A6IzJYk70BtY'
+    const googleMapsApiKey = env.GOOGLE_API_KEY
 
     const baseUrl = 'https://routes.googleapis.com/directions/v2:computeRoutes'
 
@@ -81,21 +82,8 @@ export class GetRideDetailsService implements GetRideDetails {
         fullRouteApiResponse: response.data,
       }
     } catch (error) {
-      throw new GetRideDetailsError(error)
+      console.error(error)
+      throw new GetRideDetailsError()
     }
   }
 }
-
-// const getRideDetails = new GetRideDetailsService()
-
-// getRideDetails
-//   .execute({
-//     originCoordinates: { latitude: -23.4419306, longitude: -46.8068621 },
-//     destinationCoordinates: { latitude: -23.5649224, longitude: -46.6519376 },
-//   })
-//   .then((response) => {
-//     console.log(response.distanceInMeters)
-//     console.log(response.durationInSeconds)
-//     console.log(response.fullRouteApiResponse)
-//   })
-//   .catch((error) => console.error(error))

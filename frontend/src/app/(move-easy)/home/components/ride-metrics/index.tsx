@@ -7,7 +7,7 @@ interface RideMetricsProps {
   duration: string
 }
 
-export default function RideMetrics({ distance, duration }: RideMetricsProps) {
+export function RideMetrics({ distance, duration }: RideMetricsProps) {
   return (
     <RideMetricsContainer>
       <p>Distância: {formatDistance(distance)} quilômetros</p>

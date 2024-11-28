@@ -20,7 +20,6 @@ interface DriverCardsProps {
     id: number
     name: string
     description: string
-    picture: string
     vehicle: string
     review: {
       rating: number
@@ -61,7 +60,7 @@ export function DriverCards({
     const id = Cookies.get('customerId')
 
     try {
-      const response = await api.patch('/ride/confirm', {
+      await api.patch('/ride/confirm', {
         customer_id: id,
         origin: rideInformations.origin,
         destination: rideInformations.destination,
@@ -76,8 +75,6 @@ export function DriverCards({
 
       setAxiosErrorMessage(null)
 
-      console.log(response.data)
-
       router.push('/history')
     } catch (error) {
       if (error instanceof AxiosError) {
@@ -88,52 +85,61 @@ export function DriverCards({
     }
   }
 
+  const getDriverImage = (id: number) => {
+    switch (id) {
+      case 1:
+        return '/homer-simpson.webp'
+      case 2:
+        return '/dominic-toretto.jpg'
+      case 3:
+        return '/james-bond.webp'
+      default:
+        return ''
+    }
+  }
+
   return (
     <>
       <DriverCardContainer>
-        {!hasDriverOptions ? (
-          <DriverCard>
-            <Image
-              src="/homer-simpson.webp"
-              width={250}
-              alt="Driver picture"
-              height={130}
-            />
-            <span>Homer Simpson</span>
+        {hasDriverOptions ? (
+          driverList.map((driver) => (
+            <DriverCard key={driver.id}>
+              <Image
+                src={getDriverImage(driver.id)}
+                width={250}
+                height={130}
+                alt="Driver picture"
+              />
 
-            <p>
-              Olá! Sou o Homer, seu motorista camarada! Relaxe e aproveite o
-              passeio, com direito a rosquinhas e boas risadas (e talvez alguns
-              desvios).
-            </p>
+              <span>{driver.name}</span>
 
-            <p>Veículo: Plymouth Valiant 1973 rosa e enferrujado.</p>
+              <p>{driver.description}</p>
 
-            <DriverReviewContainer>
-              <p>Avaliações:</p>
+              <p>Veículo: {driver.vehicle}</p>
 
-              <Rating value={2} readOnly />
+              <DriverReviewContainer>
+                <p>Avaliações:</p>
 
-              <p>
-                Motorista simpático, mas errou o caminho 3 vezes. O carro cheira
-                a donuts.
-              </p>
-            </DriverReviewContainer>
+                <Rating value={driver.review.rating} readOnly />
 
-            <PriceContent>Preço: {formatValue(78.66)}</PriceContent>
+                <p>{driver.review.comment}</p>
+              </DriverReviewContainer>
 
-            <ConfirmRideButton
-              onClick={() =>
-                handleConfirmRideButton({
-                  driverId: 1,
-                  driverName: 'Homer Simpson',
-                  rideValue: 78.66,
-                })
-              }
-            >
-              Selecionar Motorista
-            </ConfirmRideButton>
-          </DriverCard>
+              <PriceContent>Preço: {formatValue(driver.value)}</PriceContent>
+
+              <ConfirmRideButton
+                onClick={() =>
+                  handleConfirmRideButton({
+                    driverId: driver.id,
+                    driverName: driver.name,
+                    rideValue: driver.value,
+                  })
+                }
+              >
+                Selecionar Motorista
+              </ConfirmRideButton>
+            </DriverCard>
+          ))
         ) : (
           <ErrorContainer>
             Nenhum motorista disponível para essa viagem

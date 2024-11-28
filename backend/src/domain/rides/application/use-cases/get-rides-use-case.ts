@@ -2,16 +2,37 @@ import { CustomersRepository } from '../repositories/contracts/customers-reposit
 import { DriversRepository } from '../repositories/contracts/drivers-repository'
 import { GetAddressService } from '../services/get-address-service'
 import { CustomerNotFound } from './errors/customer-not-found'
+import { InvalidDriver } from './errors/invalid-driver'
+import { RidesNotFound } from './errors/rides-not-found'
 import {
   GetRidesResponse,
   RidesRepository,
 } from '../repositories/contracts/rides-repository'
-import { NoRidesFound } from './errors/no-rides-found'
-import { InvalidDriver } from './errors/invalid-driver'
 
-interface GetRideUseCaseResponse {
+interface GetRideUseCaseRequest {
   customerId: string
   driverId?: number
+}
+
+interface Driver {
+  id: number
+  name: string
+}
+
+interface Ride {
+  id: number
+  date: Date
+  origin: string
+  destination: string
+  distance: number
+  duration: string
+  driver: Driver
+  value: number
+}
+
+interface GetRideUseCaseResponse {
+  customer_id: string
+  rides: Ride[]
 }
 
 export class GetRidesUseCase {
@@ -56,7 +77,10 @@ export class GetRidesUseCase {
     return rideListMapped
   }
 
-  async execute({ customerId, driverId }: GetRideUseCaseResponse) {
+  async execute({
+    customerId,
+    driverId,
+  }: GetRideUseCaseRequest): Promise<GetRideUseCaseResponse> {
     const customer = await this.customersRepository.findCustomerById(customerId)
 
     if (!customer) {
@@ -77,7 +101,7 @@ export class GetRidesUseCase {
     })
 
     if (!rideList.length) {
-      throw new NoRidesFound()
+      throw new RidesNotFound()
     }
 
     const rideListMapped = await this.mapRidesWithAddressDetails(rideList)

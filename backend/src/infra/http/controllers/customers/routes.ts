@@ -1,4 +1,5 @@
 import express from 'express'
+
 import { registerCustomerController } from './register-customer-controller'
 import { findCustomerByEmailController } from './find-customer-by-email-controller'
 import { findCustomerByIdController } from './find-customer-by-id-controller'
