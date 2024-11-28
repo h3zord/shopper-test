@@ -6,9 +6,10 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     container_name: my_node_app
+    env_file:
+      - .env  
     environment:
       DATABASE_URL: postgres://postgres_user:postgres_password@db:5432/my_database
-      GOOGLE_API_KEY: AIzaSyBb43btE7llvofiBSvGJV9A6IzJYk70BtY
       PORT: 8080
     depends_on:
       - db
@@ -30,9 +31,10 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     container_name: my_next_app
+    env_file:
+      - .env
     environment:
       NEXT_PUBLIC_API_URL: http://localhost:8080
-      NEXT_PUBLIC_GOOGLE_API_KEY: AIzaSyBb43btE7llvofiBSvGJV9A6IzJYk70BtY
     depends_on:
       - backend
     ports:
